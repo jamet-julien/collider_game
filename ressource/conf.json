@@ -1,12 +1,21 @@
 {
-  "image"      : "./ressource/titre.png",
+  "image"      : "./ressource/javascript.png",
   "debug"      : true, 
   "resolution" : 30,
   "setting"    : {
-    "zoom"       : 1.3,
-    "dpi"        : 6
+    "zoom"       : 1,
+    "dpi"        : 2
   },
   "balls" : [
-    {"size" : 5}
+    { "size" : 15},
+    { "size" : 15},
+    { "size" : 15},
+    { "size" : 15},
+    { "size" : 10},
+    { "size" : 10},
+    { "size" : 10},
+    { "size" : 10},
+    { "size" : 10},
+    { "size" : 15}
   ]
 }

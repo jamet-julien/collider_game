@@ -31,8 +31,8 @@ export function createLevel(pathName, { width, height}){
     let destruct   = factoryDestruct();
 
     level.conf = conf;
-    level.entities.push( destruct);
-    level.render.push( destruct.draw);
+    //level.entities.push( destruct);
+    //level.render.push( destruct.draw);
 
 //destroyer
     conf.balls.map( (obj)=>{

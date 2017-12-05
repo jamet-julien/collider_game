@@ -7,15 +7,24 @@ export function drawGrid(conf, { width, height }) {
 
   function init(self) {
 
-    self.buffer = document.createElement('canvas');
-    _ctx = self.buffer.getContext('2d');
+    let middle  = Math.round(conf.resolution / 2);
 
-    self.buffer.width = _width;
+    self.buffer = document.createElement('canvas');
+
+    _ctx = self.buffer.getContext('2d');
+    self.buffer.width  = _width;
     self.buffer.height = _height;
 
     _ctx.strokeStyle = "green";
+    _ctx.fillStyle   = "green";
+    _ctx.font        = "bold 12px Arial";
+    _ctx.textAlign   = 'center';
+
 
     for (let i = 0; i < _width; i += conf.resolution) {
+
+      _ctx.fillText( i, i + middle , middle);
+
       _ctx.beginPath();
       _ctx.moveTo(i, 0);
       _ctx.lineTo(i, _height);
@@ -23,6 +32,9 @@ export function drawGrid(conf, { width, height }) {
     }
 
     for (let j = 0; j < _height; j += conf.resolution) {
+
+      _ctx.fillText( j, middle, j + middle);
+
       _ctx.beginPath();
       _ctx.moveTo(0, j);
       _ctx.lineTo(_width, j);
@@ -49,17 +61,21 @@ export function snapCollider( entities){
 
     entities.map(( entity) => {
       if(entity.mover){
-        let snapPos = entity.mover.snapPos( entity);
-  
-        context.beginPath();
-        context.rect(
-          snapPos.x,
-          snapPos.y,
-          entity.grid,
-          entity.grid
-        );
-  
-        context.fill();
+        let snapPosList = entity.mover.snapPos( entity);
+        
+        snapPosList.map((snapPos)=>{
+
+          context.beginPath();
+          context.rect(
+            snapPos.x,
+            snapPos.y,
+            entity.grid,
+            entity.grid
+          );
+
+          context.fill();
+
+        })
       }
 
     })
@@ -84,6 +100,36 @@ export function colliderView( entities){
       );
 
       context.stroke();
+
+      context.fillStyle = `green`;
+      context.beginPath();
+
+      context.arc(
+        entity.pos.x,
+        entity.pos.y,
+        2,
+        0,
+        2 * Math.PI,
+        false
+      );
+
+      context.fill();
+      context.closePath();
+
+      context.fillStyle = `blue`;
+      context.beginPath();
+
+      context.arc(
+        entity.pos.x + entity.offset.x,
+        entity.pos.y + entity.offset.y,
+        2,
+        0,
+        2 * Math.PI,
+        false
+      );
+
+      context.fill();
+      context.closePath();
 
     })
   }

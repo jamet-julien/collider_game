@@ -1,8 +1,3 @@
-
-
-
-
-
 export class EntityCollider{
 
   constructor(entities) {
@@ -17,9 +12,8 @@ export class EntityCollider{
         return;
       }
 
-      if ( subject.bound.overlaps( candidate.bound)) {
-        subject.hit.trigger(candidate);
-        candidate.hit.trigger(subject);
+      if( subject.bound.overlaps( candidate.bound)) {
+        subject.hit.trigger( candidate);
       }
 
     });

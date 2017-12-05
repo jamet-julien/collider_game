@@ -83,13 +83,13 @@ export function createDataWorld( image, { zoom = 1, resolution = 30, dpi = 1 }){
             continue;
           }
 
-          pos.x = Math.ceil( x/resolution) * resolution;
-          pos.y = Math.ceil( y/resolution) * resolution;
+          pos.x = Math.floor( x/resolution) * resolution;
+          pos.y = Math.floor( y/resolution) * resolution;
 
           name = `${pos.x} ${pos.y}`;
 
           if ( _coordinate.has(name)){
-            _coordinate.get(name).push( { x, y, died : false });
+            _coordinate.get(name).push( { x, y, died : false, color : `#FFF` });
           }
 
         }
@@ -99,13 +99,23 @@ export function createDataWorld( image, { zoom = 1, resolution = 30, dpi = 1 }){
           height,
           buffer,
           coordinate    :  _coordinate,
-          getCell       : function ( pos = {}){
+          
+          getCell       : function ( pos){
             let name = `${pos.x} ${pos.y}`;
 
             if (this.coordinate.has( name)){
               return this.coordinate.get( name);
             }
-             return [];
+
+            return [];
+          },
+
+          getCellList: function (posList) {
+
+            let pixelList = posList.map((pos) => {
+              return this.getCell( pos);
+            });
+            return ( posList.length) ? pixelList : [];
           },
 
           getCoordonate : function* (){

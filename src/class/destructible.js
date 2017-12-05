@@ -3,7 +3,7 @@ import BoundingBox from "./boundingbox.js";
 
 export default class Destructible{
 
-  constructor( {dpi}){
+  constructor({ dpi, resolution}){
       this.pos       = new Vector( 0, 0);
       this.lifeTime  = 0;
       this.dataWorld = {};
@@ -14,42 +14,81 @@ export default class Destructible{
       this.size      = new Vector(0, 0);
       this.offset    = new Vector(0, 0);
 
-      this.sizePix   = dpi * 2;
-      this.offsetPix = dpi;
+      this.sizePix    = dpi * 2;
+      this.offsetPix  = dpi;
+      this.resolution = resolution;
 
       this.bound     = new BoundingBox( this.pos, this.size, this.offset);
 
       this.color     = '#FFF';
       this.colorDied = '#000';
 
+      this.pieces    = [];
+      this.debug     = false;
+
   }
 
   activeDebug(){
+    this.debug       = true;
     this.sizePix     = 2;
     this.colorDied   = '#F00';
   }
 
-  updatePiece( pos){
-    let buffer  = document.createElement('canvas'),
-        context = buffer.getContext('2d');
+  pushPiece( pos){
+    this.pieces.push( pos);
+  }
 
-    buffer.x    = this.dataWorld.width;
-    buffer.y    = this.dataWorld.height;
+  drawPixel( context, died, x, y, color){
 
-    for (let { x, y, died } of this.dataWorld.getCell( pos)) {
+    context.fillStyle = (died) ? this.colorDied : color;
+    context.beginPath();
+    context.rect( x - this.offsetPix,  y - this.offsetPix, this.sizePix, this.sizePix);
+    context.fill();
+    context.closePath();
+  }
 
-      let _x = x - pos.x;
-      let _y = y - pos.y;
-
-      context.fillStyle = (died) ? this.colorDied : this.color ;
-      context.beginPath();
-      context.rect( _x - this.offsetPix, _y - this.offsetPix, this.sizePix, this.sizePix);
-      context.fill();
+  reDrawingBuffer(){
+    
+    if (this.pieces.length == 0){
+      return;
     }
 
-    this.context.drawImage( buffer, pos.x, pos.y);
+    this.pieces.map( (pos) => {
+
+      let buffer = this._updatePiece(pos);
+      this.context.drawImage( buffer, pos.x, pos.y);
+
+    });
+
     this.context.drawImage( this.dataWorld.buffer, 0, 0);
 
+    this.pieces.length = 0;
+  }
+
+  _updatePiece( pos){
+
+    let buffer    = document.createElement('canvas'),
+        context   = buffer.getContext('2d'),
+        pixel     = this.dataWorld.getCell( pos);
+
+    for (let i = 0; i < pixel.length; i++) {
+
+      let _x = pixel[i].x - pos.x;
+      let _y = pixel[i].y - pos.y;
+
+      this.drawPixel( context, pixel[i].died, _x, _y, pixel[i].color);
+    }
+
+    if( this.debug){
+
+      context.strokeStyle = 'blue';
+      context.beginPath();
+      context.rect(0, 0, 30, 30);
+      context.stroke();
+      
+    }
+
+    return buffer;
   }
 
 
@@ -61,16 +100,13 @@ export default class Destructible{
     this.size.x        = this.dataWorld.width;
     this.size.y        = this.dataWorld.height;
     
-    for (let { x, y, died } of this.dataWorld.getCoordonate()) {
-  
-      this.context.fillStyle = this.color ;
-      this.context.beginPath();
-      this.context.rect(x - this.offsetPix, y - this.offsetPix, this.sizePix, this.sizePix);
-      this.context.fill();
+    for (let { x, y, died, color } of this.dataWorld.getCoordonate()) {
+      this.drawPixel( this.context, died, x, y, color);
     }
 
-    this.context.drawImage( this.dataWorld.buffer, 0, 0);
-    this.context.drawImage( this.dataWorld.buffer, 0, 0);
+    if (!this.debug) {
+      this.context.drawImage(this.dataWorld.buffer, 0, 0);
+    }
 
   }
 
