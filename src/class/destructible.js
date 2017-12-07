@@ -28,11 +28,32 @@ export default class Destructible{
 
   }
 
+  drawImageInit() {
+
+    let buffer = document.createElement('canvas'),
+       context = buffer.getContext('2d');
+
+
+    buffer.width = this.dataWorld.width;
+    buffer.height = this.dataWorld.height;
+
+    context.fillStyle = '#FFF';
+    context.beginPath();
+    context.rect(0, 0, this.dataWorld.width, this.dataWorld.height);
+    context.fill();
+    context.closePath();
+
+    context.drawImage( this.dataWorld.buffer, 0, 0);
+
+    return buffer;
+  }
+
   activeDebug(){
     this.debug       = true;
     this.sizePix     = 2;
     this.colorDied   = '#F00';
   }
+
 
   pushPiece( pos){
     this.pieces.push( pos);
@@ -42,9 +63,10 @@ export default class Destructible{
 
     context.fillStyle = (died) ? this.colorDied : color;
     context.beginPath();
-    context.rect( x - this.offsetPix,  y - this.offsetPix, this.sizePix, this.sizePix);
+    context.rect( x - this.offsetPix,  y - this.offsetPix, 2, 2);
     context.fill();
     context.closePath();
+
   }
 
   reDrawingBuffer(){
@@ -54,13 +76,13 @@ export default class Destructible{
     }
 
     this.pieces.map( (pos) => {
-
       let buffer = this._updatePiece(pos);
       this.context.drawImage( buffer, pos.x, pos.y);
-
     });
 
-    this.context.drawImage( this.dataWorld.buffer, 0, 0);
+    if (!this.debug) {
+     this.context.drawImage( this.dataWorld.buffer, 0, 0);
+    }
 
     this.pieces.length = 0;
   }
@@ -70,7 +92,6 @@ export default class Destructible{
     let buffer    = document.createElement('canvas'),
         context   = buffer.getContext('2d'),
         pixel     = this.dataWorld.getCell( pos);
-
     for (let i = 0; i < pixel.length; i++) {
 
       let _x = pixel[i].x - pos.x;
@@ -85,6 +106,7 @@ export default class Destructible{
       context.beginPath();
       context.rect(0, 0, 30, 30);
       context.stroke();
+      context.closePath();
       
     }
 
@@ -105,7 +127,7 @@ export default class Destructible{
     }
 
     if (!this.debug) {
-      this.context.drawImage(this.dataWorld.buffer, 0, 0);
+      this.context.drawImage( this.dataWorld.buffer, 0, 0);
     }
 
   }

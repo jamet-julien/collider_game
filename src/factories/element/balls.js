@@ -42,7 +42,7 @@ export function createBall(conf, { width, height }) {
     };
   }
 
-  function draw(context, cumulate) {
+  function draw( context, cumulate) {
 
     context.fillStyle = `#FFF`;
     context.beginPath();
@@ -60,8 +60,26 @@ export function createBall(conf, { width, height }) {
     context.closePath();
   }
 
+  function drawPaint(context, cumulate) {
+
+    context.fillStyle = `#000`;
+    context.beginPath();
+
+    context.arc(
+      this.pos.x,
+      this.pos.y,
+      this.radius,
+      0,
+      2 * Math.PI,
+      false
+    );
+
+    context.fill();
+    context.closePath();
+  }
+
   return function ballElement({ size }) {
-    let ball = new Ball(Object.assign(randomPos(), { size }));
+    let ball = new Ball( Object.assign(randomPos(), { size }));
 
     let x = ( Math.random() * 600) - 300;
     let y = ( Math.random() * 600) - 300;
@@ -72,7 +90,9 @@ export function createBall(conf, { width, height }) {
 
     ball.grid = conf.resolution;
 
-    ball.draw = draw.bind(ball);
+    ball.draw      = draw.bind(ball);
+    ball.drawPaint = drawPaint.bind(ball);
+    
     return ball;
 
   }

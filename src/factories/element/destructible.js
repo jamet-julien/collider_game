@@ -42,7 +42,7 @@ class Hit extends Trait{
   
         }
   
-        if( update){
+        if (update && this.debug){
           this.subject.pushPiece( posList[ index ]);
         }
   
@@ -75,6 +75,10 @@ export function createDestructible(conf, dataWorld) {
     context.drawImage(this.buffer, 0, 0);
   }
 
+  function drawInit(context) {
+    context.drawImage( this.drawImageInit(), 0, 0);
+  }
+
   return function destructibleElement() {
 
     let oDestructible = new Destructible({ dpi: conf.setting.dpi, resolution: conf.setting.resolution});
@@ -88,9 +92,10 @@ export function createDestructible(conf, dataWorld) {
     oDestructible.updateBuffer();
 
     oDestructible.addTrait( new Destroy());
-    oDestructible.addTrait(new Hit( oDestructible, conf));
+    oDestructible.addTrait( new Hit( oDestructible, conf));
 
-    oDestructible.draw = draw.bind(oDestructible);
+    oDestructible.draw     = draw.bind(oDestructible);
+    oDestructible.drawInit = drawInit.bind(oDestructible);
     
 
     return oDestructible;

@@ -13,10 +13,13 @@
       background-color : black;
     }
 
-    #canvas{
+    canvas{
         margin          : auto 0;
         border          : 1px solid #CCC;
         image-rendering : pixelated;
+        position        : absolute;
+        top             : 0;
+        left            : 0;
     }
     
 
@@ -24,7 +27,8 @@
 </head>
 <body>
 
-  <canvas id="canvas" width="720" height="468"></canvas>
+  <canvas id="layer1" width="720" height="468"></canvas>
+  <canvas id="layer2" width="720" height="468"></canvas>
   <script src="src/main.js" type="module"></script>
 
 </body>

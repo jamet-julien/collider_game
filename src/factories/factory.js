@@ -4,7 +4,7 @@ import { createDestructible}   from "./element/destructible.js";
 import { createBall}           from "./element/balls.js";
 import Level                   from "../class/level.js";
 
-export function createLevel(pathName, { width, height}){
+export function createLevel(pathName, { width, height, onReady}){
 
   return loadJson( pathName).then( (conf)=>Promise.all([
 
@@ -26,13 +26,18 @@ export function createLevel(pathName, { width, height}){
     let level           = new Level({ width, height });
     let factoryDestruct = createDestructible( conf, dataWorld);
     let factoryBall     = createBall(conf, { width, height });
+
+    onReady( level);
   
 //destrible
     let destruct   = factoryDestruct();
 
     level.conf = conf;
-    //level.entities.push( destruct);
-    //level.render.push( destruct.draw);
+    level.entities.push( destruct);
+
+    if (level.conf.debug){
+      level.render.pushOnLayer( 'layer2', destruct.draw);
+    }
 
 //destroyer
     conf.balls.map( (obj)=>{
@@ -40,10 +45,15 @@ export function createLevel(pathName, { width, height}){
       let ball  = factoryBall( obj);
 
       level.entities.push( ball);
-      level.render.push( ball.draw);
+      level.render.pushOnLayer( 'layer1', ball.drawPaint);
+      level.render.pushOnLayer( 'layer2', ball.draw);
       
     })
     
+    if( !level.conf.debug) {
+      level.render.drawOnce( 'layer1', destruct.drawInit);
+    }
+
     return level;
   });
 

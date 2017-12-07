@@ -2,25 +2,54 @@
 
 export default function Render({ width = 720, height=480 }) {
 
-  let layers = [],
-    _width = width,
-    _height = height;
+  let board  = new Map(),
+    _width   = width,
+    _height  = height;
 
-  function push(funcDraw) {
-    layers.push( funcDraw);
-  }
 
-  function draw(context, deltaTime) {
-    context.clearRect(0, 0, _width, _height);
-    layers.map(funcDraw => {
-      
-      funcDraw( context, deltaTime);
+  function addLayer( name, context, initCall = ()=>{}){
+    board.set( name ,{
+      layers : [],
+      context ,
+      initCall
     });
   }
 
+  function pushOnLayer( name, funcDraw){
+    if (board.has(name)){
+      board.get( name).layers.push( funcDraw);
+    }
+  }
+
+  function draw( deltaTime){
+    for (let [key, obj] of board) {
+      _drawLayer( obj.layers, obj.context, obj.initCall, deltaTime)
+    }
+  }
+
+  function drawOnce( name, funcDraw){
+    if (board.has(name)) {
+      let { context} = board.get(name);
+      funcDraw( context);
+    }
+  }
+
+  function _drawLayer( layers, context, initCall, deltaTime) {
+   
+    initCall( context, deltaTime); 
+    
+    layers.map(funcDraw => {
+      funcDraw( context, deltaTime);
+    });
+    
+
+  }
+
   return {
-    push,
-    draw,
+    addLayer,
+    drawOnce,
+    pushOnLayer,
+    draw
   }
 
 };

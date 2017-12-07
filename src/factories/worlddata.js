@@ -34,7 +34,7 @@ export function createDataWorld( image, { zoom = 1, resolution = 30, dpi = 1 }){
       let i = 0, j = 0;
 
       for (; j < len; j += 4, i++) {
-        pixel[j+3] <= 100 && data.push( i);
+        pixel[j+3] == 0 && data.push( i);
       }
 
       return { 
@@ -52,6 +52,7 @@ export function createDataWorld( image, { zoom = 1, resolution = 30, dpi = 1 }){
     async function analyse({ zoom , resolution, dpi}){
 
       const { data, width, height, buffer} =  _getData( zoom);
+
       let   mapW   = Math.ceil( width / resolution),
             mapH   = Math.ceil( height / resolution),
           mapLen   = (mapW * mapH)+1;

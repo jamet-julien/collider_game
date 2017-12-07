@@ -28,6 +28,12 @@ export default class Vector {
     return this;
   }
 
+  sub(oVector) {
+    this.x -= oVector.x;
+    this.y -= oVector.y;
+    return this;
+  }
+
   limit(iMag) {
     var iMagCurrent = this.magnetude;
 
