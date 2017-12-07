@@ -9,7 +9,6 @@ const layer1 = document.getElementById('layer1'),
       layer2 = document.getElementById('layer2'),
       ctx2   = layer2.getContext('2d');
 
-
 function onReady(level){
   
   level.render.addLayer( 'layer1', ctx1);

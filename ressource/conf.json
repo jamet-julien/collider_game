@@ -1,13 +1,17 @@
 {
-  "image"      : "./ressource/titre-test.png",
-  "debug"      : true, 
-  "resolution" : 30,
-  "setting"    : {
-    "zoom"       : 1,
-    "dpi"        : 6
+  "crashImage"   : "./ressource/crash.png",
+  "destroyImage" : "./ressource/titre-test.png",
+  "debug"        : false,
+  "resolution"   : 25,
+  "setting"      : {
+    "zoom" : 1,
+    "dpi"  : 2
   },
+  
+
   "balls" : [
-    { "size" : 5},
-    { "size" : 5}
+    { "size" : 6},
+    { "size" : 6},
+    { "size" : 6}
   ]
 }

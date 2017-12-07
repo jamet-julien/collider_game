@@ -18,10 +18,8 @@ class Hit extends Trait{
         y : 0
     };
 
-    if( candidate.destroy){
-
-    }else{
-      this.subject.bounce.collide( this.subject, candidate);
+    if( !candidate.destroy){
+      //this.subject.bounce.collide( this.subject, candidate);
     }
 
     return position;
@@ -60,22 +58,20 @@ export function createBall(conf, { width, height }) {
     context.closePath();
   }
 
-  function drawPaint(context, cumulate) {
+  function drawPaint( context, cumulate){
 
-    context.fillStyle = `#000`;
+    context.strokeStyle = `#000`;
+    context.strokeStyle = `#000`;
+   
     context.beginPath();
+    context.moveTo(this.lastPos.x, this.lastPos.y);
+    context.lineWidth = 9;
+    context.lineCap   = 'round';
+    context.lineTo(this.pos.x, this.pos.y);
+    context.stroke();
 
-    context.arc(
-      this.pos.x,
-      this.pos.y,
-      this.radius,
-      0,
-      2 * Math.PI,
-      false
-    );
+    this.lastPos = this.pos.copy();
 
-    context.fill();
-    context.closePath();
   }
 
   return function ballElement({ size }) {
@@ -90,8 +86,8 @@ export function createBall(conf, { width, height }) {
 
     ball.grid = conf.resolution;
 
-    ball.draw      = draw.bind(ball);
-    ball.drawPaint = drawPaint.bind(ball);
+    ball.draw        = draw.bind(ball);
+    ball.drawPaint   = drawPaint.bind( ball);
     
     return ball;
 

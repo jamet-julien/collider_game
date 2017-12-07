@@ -4,27 +4,28 @@ import BoundingBox from "./boundingbox.js";
 export default class Destructible{
 
   constructor({ dpi, resolution}){
-      this.pos       = new Vector( 0, 0);
-      this.lifeTime  = 0;
-      this.dataWorld = {};
-      this.traits    = [];
-      this.buffer    = document.createElement('canvas');
-      this.context   = this.buffer.getContext('2d');
+      this.pos         = new Vector( 0, 0);
+      this.lifeTime    = 0;
+      this.dataWorld   = {};
+      this.traits      = [];
+      this.buffer      = document.createElement('canvas');
+      this.bufferCrash = false;
+      this.context     = this.buffer.getContext('2d');
 
-      this.size      = new Vector(0, 0);
-      this.offset    = new Vector(0, 0);
+      this.size   = new Vector(0, 0);
+      this.offset = new Vector(0, 0);
 
       this.sizePix    = dpi * 2;
       this.offsetPix  = dpi;
       this.resolution = resolution;
 
-      this.bound     = new BoundingBox( this.pos, this.size, this.offset);
+      this.bound = new BoundingBox( this.pos, this.size, this.offset);
 
       this.color     = '#FFF';
       this.colorDied = '#000';
 
-      this.pieces    = [];
-      this.debug     = false;
+      this.pieces = [];
+      this.debug  = false;
 
   }
 
@@ -87,6 +88,40 @@ export default class Destructible{
     this.pieces.length = 0;
   }
 
+
+  drawCrash(){
+
+    let buffer  = document.createElement('canvas'),
+        context = buffer.getContext('2d');
+
+    buffer.width  = this.dataWorld.width;
+    buffer.height = this.dataWorld.height;
+    
+    this.pieces.map((pos) => {
+
+      let pixel = this.dataWorld.getCell( pos);
+
+      for (let i = 0; i < pixel.length; i++) {
+
+        let _x = pixel[i].x;
+        let _y = pixel[i].y;
+
+        if( pixel[i].died){
+
+          if( this.bufferCrash){
+            context.drawImage( this.bufferCrash, _x - 7, _y- 7);
+          }
+        }
+
+      }
+
+    });
+
+    this.pieces.length = 0;
+
+    return buffer;
+  }
+
   _updatePiece( pos){
 
     let buffer    = document.createElement('canvas'),
@@ -98,16 +133,6 @@ export default class Destructible{
       let _y = pixel[i].y - pos.y;
 
       this.drawPixel( context, pixel[i].died, _x, _y, pixel[i].color);
-    }
-
-    if( this.debug){
-
-      context.strokeStyle = 'blue';
-      context.beginPath();
-      context.rect(0, 0, 30, 30);
-      context.stroke();
-      context.closePath();
-      
     }
 
     return buffer;

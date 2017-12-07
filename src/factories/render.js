@@ -17,7 +17,12 @@ export default function Render({ width = 720, height=480 }) {
 
   function pushOnLayer( name, funcDraw){
     if (board.has(name)){
-      board.get( name).layers.push( funcDraw);
+
+      if(funcDraw){
+        board.get( name).layers.push( funcDraw);
+      }else{
+        console.log(funcDraw + ' - ' + name);
+      }
     }
   }
 

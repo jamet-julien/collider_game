@@ -5,7 +5,14 @@ export default class Mover extends Trait{
 
     constructor( x, y){
       super('mover');
-      this.vel = new Vector( x, y); 
+      this.x = x;
+      this.y = y;
+      this.vel     = new Vector( x, y); 
+      this.lastVel = this.vel.copy();
+    }
+
+    reset(){
+      this.vel = new Vector( this.x, this.y); 
     }
 
     snapPos( entity) {

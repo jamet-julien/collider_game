@@ -86,8 +86,11 @@ export function createDataWorld( image, { zoom = 1, resolution = 30, dpi = 1 }){
 
           pos.x = Math.floor( x/resolution) * resolution;
           pos.y = Math.floor( y/resolution) * resolution;
-
+          
           name = `${pos.x} ${pos.y}`;
+          
+          x += Math.round( Math.random() * 3);
+          y += Math.round( Math.random() * 3);
 
           if ( _coordinate.has(name)){
             _coordinate.get(name).push( { x, y, died : false, color : `#FFF` });
