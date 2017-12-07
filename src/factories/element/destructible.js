@@ -77,13 +77,11 @@ class Hit extends Trait{
       
       vectPer.unit.mult( candidate.mover.vel.magnetude);
       candidate.mover.vel = vectPer.copy();
-      
-
+    
     }
     
     if (candidate.mover.vel.magnetude == 0) {
       candidate.mover.reset();
-
     }
 
     return true;
@@ -173,7 +171,7 @@ export function createDestructible( conf, dataWorld, getCrash) {
     oDestructible.drawDebug = drawDebug.bind( oDestructible);
     oDestructible.draw      = draw.bind( oDestructible);
     oDestructible.drawInit  = drawInit.bind( oDestructible);
-    
+  
 
     return oDestructible;
   }

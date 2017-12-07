@@ -17,15 +17,15 @@ export function createSprite( image){
       const bufferTmp  = document.createElement('canvas'),
             contextTmp = bufferTmp.getContext('2d');
 
-      bufferTmp.width  = 15;
-      bufferTmp.height = 15;
+      bufferTmp.width  = 6;
+      bufferTmp.height = 6;
 
       contextTmp.drawImage(
               buffer,
               0, 0,
               100, 100,
               0, 0,
-              15, 15);
+              6, 6);
 
       return bufferTmp;
     }

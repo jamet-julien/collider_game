@@ -109,7 +109,7 @@ export default class Destructible{
         if( pixel[i].died){
 
           if( this.bufferCrash){
-            context.drawImage( this.bufferCrash, _x - 7, _y- 7);
+            context.drawImage( this.bufferCrash, _x - 3, _y- 3);
           }
         }
 
