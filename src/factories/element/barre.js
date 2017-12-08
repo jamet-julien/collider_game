@@ -90,9 +90,9 @@ export function createBarre(conf, { widthScene, heightScene }) {
 
   }
 
-  return function barreElement({ width, height, x, y }) {
+  return function barreElement({ width, height, x, y , angle}) {
 
-    let barre = new Barre( { width, height, x, y } , { widthScene, heightScene });
+    let barre = new Barre( { width, height, x, y , angle} , { widthScene, heightScene });
 
 
     barre.addTrait( new Hit(barre));

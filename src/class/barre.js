@@ -4,7 +4,7 @@ import BoundingBox from "./boundingbox.js";
 
 export default class Barre{
   
-  constructor( { width, height, x, y}, {widthScene, heightScene}){
+  constructor( { width, height, x, y, angle}, {widthScene, heightScene}){
     
       this.TO_RADIAN = -(Math.PI / 180);
       this.traits    = [];
@@ -27,7 +27,7 @@ export default class Barre{
         this.offset  = new Vector( 0, Math.round(height/-2));
       }
       
-      this.angle = 20;
+      this.angle = angle;
 
       this.bound = new BoundingBox(this.pos, this.sizeBound, this.offset);
     }
