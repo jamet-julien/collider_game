@@ -3,15 +3,15 @@
   "destroyImage" : "./ressource/titre-test.png",
   "debug"        : false,
   "resolution"   : 25,
+
   "setting"      : {
     "zoom" : 1,
-    "dpi"  : 2
+    "dpi"  : 3
   },
   
-
   "balls" : [
-    { "size" : 6},
-    { "size" : 6},
-    { "size" : 6}
+    { "size" : 10},
+    { "size" : 10},
+    { "size" : 10}
   ]
 }

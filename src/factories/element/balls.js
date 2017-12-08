@@ -65,7 +65,7 @@ export function createBall(conf, { width, height }) {
    
     context.beginPath();
     context.moveTo(this.lastPos.x, this.lastPos.y);
-    context.lineWidth = 9;
+    context.lineWidth = this.width;
     context.lineCap   = 'round';
     context.lineTo(this.pos.x, this.pos.y);
     context.stroke();
