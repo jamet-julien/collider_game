@@ -29,6 +29,7 @@ export function drawGrid(conf, { width, height }) {
       _ctx.moveTo(i, 0);
       _ctx.lineTo(i, _height);
       _ctx.stroke();
+      _ctx.closePath();
     }
 
     for (let j = 0; j < _height; j += conf.resolution) {
@@ -39,6 +40,7 @@ export function drawGrid(conf, { width, height }) {
       _ctx.moveTo(0, j);
       _ctx.lineTo(_width, j);
       _ctx.stroke();
+      _ctx.closePath();
     }
 
   }
@@ -74,6 +76,7 @@ export function snapCollider( entities){
           );
 
           context.fill();
+          context.closePath();
 
         })
       }
@@ -82,16 +85,39 @@ export function snapCollider( entities){
   }
 }
 
+export function colliderBarre( entities){
+
+  let barres = entities.filter(entity => entity.point2);
+
+    return function( context, cumulate){
+      context.strokeStyle = "blue";
+      context.lineCap   = 'round';
+      
+      barres.map((entity) => {
+        
+        context.beginPath();
+        context.lineWidth = 5;
+        context.moveTo( entity.point1.x, entity.point1.y);
+        context.lineTo( entity.point2.x, entity.point2.y );
+        context.stroke();
+        context.closePath();
+
+      });
+    }
+
+}
+
 
 export function colliderView( entities){
 
 
   return function( context, cumulate){
     context.strokeStyle = "red";
-
+    
     entities.map( (entity) =>{
-
+      
       context.beginPath();
+      context.lineWidth = 1;
       context.rect( 
         entity.bound.left,
         entity.bound.top,
@@ -100,6 +126,7 @@ export function colliderView( entities){
       );
 
       context.stroke();
+      context.closePath();
 
       context.fillStyle = `green`;
       context.beginPath();
@@ -128,8 +155,8 @@ export function colliderView( entities){
         false
       );
 
-      context.fill();
       context.closePath();
+      context.fill();
 
     })
   }

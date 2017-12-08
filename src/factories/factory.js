@@ -2,6 +2,7 @@ import { loadJson, loadImage } from "../utils/loader.js";
 import { createDataWorld}      from "./worlddata.js";
 import { createDestructible}   from "./element/destructible.js";
 import { createBall}           from "./element/balls.js";
+import { createBarre}           from "./element/barre.js";
 import Level                   from "../class/level.js";
 import { createSprite}         from "./spritesheet.js";
 
@@ -30,7 +31,10 @@ export function createLevel(pathName, { width, height, onReady}){
     let factoryDestruct = createDestructible(conf, dataWorld, getCrash);
     let factoryBall     = createBall( conf, { width, height });
 
+      let factoryBarre = createBarre( conf, { widthScene: width, heightScene: height });
+
     onReady( level);
+
   
 //destructible
     let destruct   = factoryDestruct();
@@ -43,6 +47,14 @@ export function createLevel(pathName, { width, height, onReady}){
     }else{
       level.render.pushOnLayer( 'layer1', destruct.draw);
     }
+
+    conf.barre.map( (obj) =>{
+      let barre = factoryBarre( obj);
+      level.entities.push(barre);
+      level.render.pushOnLayer('layer2', barre.draw);
+    });
+
+
 
 //destroyer
     conf.balls.map( (obj)=>{

@@ -1,3 +1,6 @@
+function radToDeg(iAngle) {
+  return (iAngle * 180) / Math.PI;
+}
 
 export default class Vector {
 
@@ -41,6 +44,31 @@ export default class Vector {
       this.magnetude = iMag;
     }
     return this
+  }
+
+  /**
+  * [angle description]
+  * @return {[type]} [description]
+  */
+  get angle() {
+    var iAngleR = Math.atan2(this.y, this.x);
+    return radToDeg(iAngleR);
+  }
+
+  /**
+   * [setAngle description]
+   * @param {[type]} iAngle [description]
+   */
+  set angle(iAngle) {
+
+    var iHeading = this.angle + iAngle,
+      iMag = this.magnetude;
+
+    this.x = Math.cos( iHeading) * iMag;
+    this.y = Math.sin( iHeading) * iMag;
+
+    return this;
+
   }
 
   get unit() {

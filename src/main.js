@@ -1,7 +1,7 @@
 import Timer from './class/timer.js';
 import { createLevel } from './factories/factory.js';
 
-import { colliderView, snapCollider, drawGrid } from './factories/debug.js';
+import { colliderView, snapCollider, drawGrid, colliderBarre } from './factories/debug.js';
 
 
 const layer1 = document.getElementById('layer1'),
@@ -29,6 +29,7 @@ async function init(){
     level.render.pushOnLayer( 'layer2', drawGrid( level.conf, { width: layer1.width, height: layer1.height }));
     level.render.pushOnLayer( 'layer2', colliderView( level.entities));
     level.render.pushOnLayer( 'layer2', snapCollider( level.entities));
+    level.render.pushOnLayer( 'layer2', colliderBarre( level.entities));
   }
 
   time.draw = (deltaTime) => {
