@@ -17,15 +17,15 @@ export function createSprite( image){
       const bufferTmp  = document.createElement('canvas'),
             contextTmp = bufferTmp.getContext('2d');
 
-      bufferTmp.width  = 6;
-      bufferTmp.height = 6;
+      bufferTmp.width  = width;
+      bufferTmp.height = height;
 
       contextTmp.drawImage(
               buffer,
               0, 0,
-              100, 100,
+              buffer.width, buffer.height,
               0, 0,
-              6, 6);
+              width, height);
 
       return bufferTmp;
     }
@@ -33,7 +33,7 @@ export function createSprite( image){
   init();
 
   return function getCrash( { width, height} ){
-    return resize( width, height);
+    return resize( 6, 6);
   }
 
 }

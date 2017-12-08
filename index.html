@@ -13,6 +13,13 @@
       background-color : black;
     }
 
+    .board{
+      position : relative;
+      width    : 468px;
+      height   : 720px;
+      margin   : 0 auto;
+    }
+
     canvas{
         margin          : auto 0;
         border          : 1px solid #CCC;
@@ -27,8 +34,10 @@
 </head>
 <body>
 
-  <canvas id="layer1" width="720" height="468"></canvas>
-  <canvas id="layer2" width="720" height="468"></canvas>
+  <div class="board">
+    <canvas id="layer1" width="468" height="720"></canvas>
+    <canvas id="layer2" width="468" height="720"></canvas>
+  </div>
   <script src="src/main.js" type="module"></script>
 
 </body>

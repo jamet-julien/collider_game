@@ -19,16 +19,16 @@ export function createLevel(pathName, { width, height, onReady}){
       createSprite( crashImage),
       createDataWorld(
         destroyImage, {
-          zoom      : conf.setting.zoom,
-          resolution: conf.resolution,
-          dpi       : conf.setting.dpi
+          width,
+          resolution : conf.resolution,
+          dpi        : conf.setting.dpi
         }
       )
     ])).then(([conf, destroyImage, getCrash, dataWorld]) => {
 
-    let level            = new Level({ width, height });
-      let factoryDestruct = createDestructible(conf, dataWorld, getCrash);
-      let factoryBall    = createBall( conf, { width, height });
+    let level           = new Level({ width, height });
+    let factoryDestruct = createDestructible(conf, dataWorld, getCrash);
+    let factoryBall     = createBall( conf, { width, height });
 
     onReady( level);
   

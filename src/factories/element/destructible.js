@@ -30,7 +30,7 @@ class Hit extends Trait{
 
       if( pixel.length){
 
-        if( pixel.length <= 4){
+        if( pixel.length <= 2){
 
             update = true;
 

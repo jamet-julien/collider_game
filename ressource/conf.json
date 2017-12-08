@@ -5,13 +5,12 @@
   "resolution"   : 25,
 
   "setting"      : {
-    "zoom" : 1,
     "dpi"  : 3
   },
   
   "balls" : [
-    { "size" : 10},
-    { "size" : 10},
-    { "size" : 10}
+    { "size" : 8},
+    { "size" : 8},
+    { "size" : 8}
   ]
 }

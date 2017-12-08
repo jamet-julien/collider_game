@@ -1,7 +1,7 @@
 import { indexToXY } from "../utils/math.js";
 
 
-export function createDataWorld( image, { zoom = 1, resolution = 30, dpi = 1 }){
+export function createDataWorld( image, { width = 468, resolution = 30, dpi = 1 }){
 
       let _image  = image,
       _coordinate = new Map();
@@ -16,7 +16,7 @@ export function createDataWorld( image, { zoom = 1, resolution = 30, dpi = 1 }){
       let data = [];
 
       const buffer = document.createElement('canvas');
-      buffer.width = _image.width * zoom;
+      buffer.width  = _image.width * zoom;
       buffer.height = _image.height * zoom;
 
       const context = buffer.getContext('2d');
@@ -135,6 +135,8 @@ export function createDataWorld( image, { zoom = 1, resolution = 30, dpi = 1 }){
 
     }
 
-    return analyse({ zoom, resolution, dpi});
+   
+
+  return analyse({ zoom: (width/_image.width), resolution, dpi});
 
 };
