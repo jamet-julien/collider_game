@@ -5,34 +5,55 @@ import BoundingBox from "./boundingbox.js";
 export default class Barre{
   
   constructor({ width, height, x, y, angle}, {widthScene, heightScene}){
-    
+
+    let middleHeight = Math.round(height / 2);
+    let stepSegment  = 6;
+
       this.TO_RADIAN = -(Math.PI / 180);
       this.traits    = [];
       this.pos       = new Vector( x, y);
       this.size      = new Vector( width, height);
       this.sizeBound = new Vector( width, heightScene-y);
 
+      this.segment     = [];
+
       this.angleReal    = 0;
       this.angleAdjust  = 1;
       this.amplitudeMax = angle;
-      this.point1       = new Vector( x, y);
-      
+
       if (this.pos.x > (widthScene/2)){
-        this.side   = 'left';
-        this.point2 = new Vector( x - width, y);
-        this.offset = new Vector( -width, Math.round(height/-2));
+        this.side        = 'left';
+        this.offset      = new Vector( -width, Math.round(height/-2));
         this.angleAdjust = -1;
       }else{
         this.side        = 'right';
-        this.point2      = new Vector( x + width, y);
         this.offset      = new Vector( 0, Math.round(height/-2));
       }
+
+    for (let i = -middleHeight; i <= middleHeight; i += stepSegment ){
+        this.buildSegment( x, y+i);
+      }
+
       
       this.angle = angle;
-      this.timeLife = 0;
-
       this.bound = new BoundingBox(this.pos, this.sizeBound, this.offset);
     }
+
+    buildSegment( XOrig, YOrig){
+      
+      let x = (this.side == 'left') ? XOrig - this.size.x : XOrig + this.size.x;
+      let y = YOrig;
+
+      let point1 = new Vector( XOrig, YOrig);
+      let point2 = new Vector( x, y);
+
+      this.segment.push(
+        { point1, point2 }
+      );
+
+    };
+
+
 
     get angle(){
       return this.angleReal ;
@@ -53,9 +74,16 @@ export default class Barre{
 
 
       if (this.side == 'right'){
-        this.point2    = this.point1.copy().add( new Vector( x, y));
+
+        this.segment.map( (seg) => {
+          seg.point2    = seg.point1.copy().add( new Vector( x, y));
+        });
+
+
       }else{
-        this.point2    = this.point1.copy().sub( new Vector( x, y));
+        this.segment.map((seg) => {
+          seg.point2    = seg.point1.copy().sub( new Vector( x, y));
+        });
       }
 
     }
@@ -75,13 +103,10 @@ export default class Barre{
 
     update( freq){
 
-      this.angle = (Math.cos( this.timeLife * 1000*freq) * this.amplitudeMax) + this.amplitudeMax ;
-
-      this.timeLife += freq;
-
       this.traits.map( (trait)=>{
         trait.update( this, freq);
       });
+
     }
 
 }

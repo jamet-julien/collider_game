@@ -2,6 +2,7 @@ import Trait                from "../../class/trait.js";
 import Barre                from "../../class/barre.js";
 import { intersectSegment}  from "../../utils/math.js";
 import Vector               from "../../utils/vector.js";
+import Rotate               from "../../trait/rotate.js";
 
 
 class Hit extends Trait{
@@ -31,29 +32,41 @@ class Hit extends Trait{
     }
 
     let segments       = candidate.getSegment(),
-        segmentSubject = { point1: this.subject.point1, point2: this.subject.point2 },
+        segmentSubject = this.subject.segment,
+        lenSeg         = segmentSubject.length,
         len            = segments.length;
 
     for (let i = 0; i < len ; i++){
+      for (let j = 0; j < lenSeg; j++) {
 
-      if( intersectSegment( segments[ i ], segmentSubject)){
-        let x, y;
-        if( this.subject.side == 'left'){
-          x = this.subject.point2.x - this.subject.point1.x;
-          y = this.subject.point2.y - this.subject.point1.y;
-        }else{
-          x = this.subject.point1.x - this.subject.point2.x;
-          y = this.subject.point1.y - this.subject.point2.y;
+        if (intersectSegment( segments[i], segmentSubject[j])){
+          
+          let x, y;
+  
+          if( this.subject.side == 'left'){
+  
+            x = segmentSubject[ j ].point2.x - segmentSubject[ j ].point1.x;
+            y = segmentSubject[ j ].point2.y - segmentSubject[ j ].point1.y;
+  
+          }else{
+  
+            x = segmentSubject[ j ].point1.x - segmentSubject[ j ].point2.x;
+            y = segmentSubject[ j ].point1.y - segmentSubject[ j ].point2.y;
+  
+          }
+  
+          let vector = new Vector( -y, x);
+  
+          vector.unit.mult( candidate.mover.max);  
+          
+          candidate.mover.vel.magnetude = candidate.mover.max;
+          candidate.mover.vel.add( vector);
+          
+          return;
+
         }
-
-        let vector = new Vector( -y, x);
-
-        vector.unit.mult( candidate.mover.max);        
-        candidate.mover.vel = vector;
-        return;
       }
     }
-
   }
 
   update( entity) { }
@@ -95,7 +108,8 @@ export function createBarre(conf, { widthScene, heightScene }) {
     let barre = new Barre({ width, height, x, y, angle} , { widthScene, heightScene });
 
 
-    barre.addTrait( new Hit(barre));
+    barre.addTrait( new Hit( barre));
+    barre.addTrait( new Rotate( angle));
 
     barre.draw = draw.bind( barre);
     

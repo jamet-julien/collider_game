@@ -1,5 +1,6 @@
 import Timer from './class/timer.js';
 import { createLevel } from './factories/factory.js';
+import { setupKeyboard } from './factories/input.js';
 
 import { colliderView, snapCollider, drawGrid, colliderBarre } from './factories/debug.js';
 
@@ -31,6 +32,11 @@ async function init(){
     level.render.pushOnLayer( 'layer2', snapCollider( level.entities));
     level.render.pushOnLayer( 'layer2', colliderBarre( level.entities));
   }
+
+
+
+  const input = setupKeyboard( level.entities);
+  input.listenTo(window);
 
   time.draw = (deltaTime) => {
     level.render.draw( deltaTime);

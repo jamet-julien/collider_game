@@ -87,20 +87,25 @@ export function snapCollider( entities){
 
 export function colliderBarre( entities){
 
-  let barres = entities.filter(entity => entity.point2);
+  let barres = entities.filter(entity => entity.segment);
 
     return function( context, cumulate){
+      
       context.strokeStyle = "blue";
-      context.lineCap   = 'round';
+      context.lineCap     = 'round';
+      context.lineWidth   = 1;
       
       barres.map((entity) => {
         
-        context.beginPath();
-        context.lineWidth = 5;
-        context.moveTo( entity.point1.x, entity.point1.y);
-        context.lineTo( entity.point2.x, entity.point2.y );
-        context.stroke();
-        context.closePath();
+        entity.segment.map(({ point1, point2}) => {
+
+          context.beginPath();
+          context.moveTo( point1.x, point1.y);
+          context.lineTo( point2.x, point2.y );
+          context.stroke();
+          context.closePath();
+
+        })
 
       });
     }

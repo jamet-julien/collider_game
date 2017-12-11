@@ -17,7 +17,7 @@ export default class Mover extends Trait{
       this.max = ( this.vel.magnetude * 2);
 
 
-      this.gravity = new Vector( 0, .1);
+      this.gravity = new Vector( 0, 3);
     }
 
     reset(){
