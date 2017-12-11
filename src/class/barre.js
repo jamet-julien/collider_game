@@ -4,7 +4,7 @@ import BoundingBox from "./boundingbox.js";
 
 export default class Barre{
   
-  constructor( { width, height, x, y, angle}, {widthScene, heightScene}){
+  constructor({ width, height, x, y, angle}, {widthScene, heightScene}){
     
       this.TO_RADIAN = -(Math.PI / 180);
       this.traits    = [];
@@ -12,9 +12,10 @@ export default class Barre{
       this.size      = new Vector( width, height);
       this.sizeBound = new Vector( width, heightScene-y);
 
-      this.angleReal   = 0;
-      this.angleAdjust = 1;
-      this.point1      = new Vector( x, y);
+      this.angleReal    = 0;
+      this.angleAdjust  = 1;
+      this.amplitudeMax = angle;
+      this.point1       = new Vector( x, y);
       
       if (this.pos.x > (widthScene/2)){
         this.side   = 'left';
@@ -22,12 +23,13 @@ export default class Barre{
         this.offset = new Vector( -width, Math.round(height/-2));
         this.angleAdjust = -1;
       }else{
-        this.side    = 'right';
-        this.point2  = new Vector( x + width, y);
-        this.offset  = new Vector( 0, Math.round(height/-2));
+        this.side        = 'right';
+        this.point2      = new Vector( x + width, y);
+        this.offset      = new Vector( 0, Math.round(height/-2));
       }
       
       this.angle = angle;
+      this.timeLife = 0;
 
       this.bound = new BoundingBox(this.pos, this.sizeBound, this.offset);
     }
@@ -38,7 +40,9 @@ export default class Barre{
 
     set angle( angle){
 
+     
       angle *= this.angleAdjust;
+     
 
       this.angleReal = angle;
 
@@ -70,6 +74,10 @@ export default class Barre{
     }
 
     update( freq){
+
+      this.angle = (Math.cos( this.timeLife * 1000*freq) * this.amplitudeMax) + this.amplitudeMax ;
+
+      this.timeLife += freq;
 
       this.traits.map( (trait)=>{
         trait.update( this, freq);

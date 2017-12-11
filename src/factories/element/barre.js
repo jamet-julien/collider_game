@@ -47,8 +47,8 @@ class Hit extends Trait{
         }
 
         let vector = new Vector( -y, x);
-        vector.unit.mult( candidate.mover.vel.magnetude);
-        
+
+        vector.unit.mult( candidate.mover.max);        
         candidate.mover.vel = vector;
         return;
       }
@@ -92,7 +92,7 @@ export function createBarre(conf, { widthScene, heightScene }) {
 
   return function barreElement({ width, height, x, y , angle}) {
 
-    let barre = new Barre( { width, height, x, y , angle} , { widthScene, heightScene });
+    let barre = new Barre({ width, height, x, y, angle} , { widthScene, heightScene });
 
 
     barre.addTrait( new Hit(barre));

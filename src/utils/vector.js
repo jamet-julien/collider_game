@@ -37,10 +37,19 @@ export default class Vector {
     return this;
   }
 
-  limit(iMag) {
+  limitMax( iMag) {
     var iMagCurrent = this.magnetude;
 
     if (iMagCurrent > iMag) {
+      this.magnetude = iMag;
+    }
+    return this
+  }
+
+  limitMin( iMag) {
+    var iMagCurrent = this.magnetude;
+
+    if (iMagCurrent < iMag) {
       this.magnetude = iMag;
     }
     return this

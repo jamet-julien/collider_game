@@ -8,7 +8,16 @@ export default class Mover extends Trait{
       this.x = x;
       this.y = y;
       this.vel     = new Vector( x, y); 
+
+      this.vel.magnetude = 300;
+
       this.lastVel = this.vel.copy();
+
+      this.min = this.vel.magnetude;
+      this.max = ( this.vel.magnetude * 2);
+
+
+      this.gravity = new Vector( 0, .1);
     }
 
     reset(){
@@ -66,6 +75,14 @@ export default class Mover extends Trait{
     update( entity, freq){
       
       //entity.pos.add( this.vel);
+
+      this.vel.magnetude *= .999;
+
+      this.vel.limitMax( this.max);
+      this.vel.limitMin( this.min);
+
+      this.vel.add( this.gravity);
+
 
       entity.pos.x += ( this.vel.x * freq);
       entity.pos.y += ( this.vel.y * freq);
