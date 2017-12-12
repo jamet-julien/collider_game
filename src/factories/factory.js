@@ -29,7 +29,8 @@ export function createLevel(pathName, { width, height, onReady}){
 
     let level           = new Level({ width, height });
     level.time          = conf.time;
-    
+    level.palier        = conf.palier;
+
     let factoryDestruct = createDestructible(conf, dataWorld, getCrash);
     let factoryBall     = createBall( conf, { width, height });
 
@@ -73,6 +74,11 @@ export function createLevel(pathName, { width, height, onReady}){
     level.life = level.lifeInit;
     
     if( !level.conf.debug) {
+      
+      level.onReset = ()=>{
+        level.render.drawOnce( 'layer1', destruct.drawInit);
+      }
+
       level.render.drawOnce( 'layer1', destruct.drawInit);
     }
 

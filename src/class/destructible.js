@@ -145,8 +145,12 @@ export default class Destructible{
 
   resetBuffer(){
 
+    this.totalPixel   = this.dataWorld.total;
+    this.currentPixel = 0;
+
     for (let pixel of this.dataWorld.getCoordonate()) {
-      pixel.died = false;
+      pixel.died  = false;
+      pixel.color = '#FFF';
     }
 
     this.updateBuffer();

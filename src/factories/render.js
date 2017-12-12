@@ -21,7 +21,7 @@ export default function Render({ width = 720, height=480 }) {
       if(funcDraw){
         board.get( name).layers.push( funcDraw);
       }else{
-        console.log(funcDraw + ' - ' + name);
+        console.log( funcDraw + ' - ' + name);
       }
     }
   }

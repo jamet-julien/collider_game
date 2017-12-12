@@ -39,7 +39,7 @@ class Hit extends Trait{
     for (let i = 0; i < len ; i++){
       for (let j = 0; j < lenSeg; j++) {
 
-        if (intersectSegment( segments[i], segmentSubject[j])){
+        if ( intersectSegment( segments[i], segmentSubject[j])){
           
           let x, y;
   
@@ -60,6 +60,8 @@ class Hit extends Trait{
           vector.unit.mult( candidate.mover.max);  
           
           candidate.mover.vel.magnetude = candidate.mover.max;
+          candidate.pos.x -= candidate.radius + 1;
+          candidate.pos.y -= candidate.radius + 1;
           candidate.mover.vel.add( vector);
           
           return;
@@ -82,21 +84,22 @@ export function createBarre(conf, { widthScene, heightScene }) {
   function draw( context, cumulate){
 
     context.save();
+
     context.translate( this.pos.x, this.pos.y);
 
-    context.rotate(this.angle * TO_RADIAN);
+    context.rotate( this.angle * TO_RADIAN);
 
-    context.fillStyle = `#FFF`;
+    context.fillStyle   = `#FFF`;
+    context.strokeStyle = "#FFF";
+    context.lineCap     = 'round';
+    context.lineWidth   = 15;
+
     context.beginPath();
+    
+    context.moveTo( this.offset.x, this.offset.y + this.middleHeight);
+    context.lineTo( this.offset.x + this.size.x, this.offset.y + this.middleHeight);
+    context.stroke();
 
-    context.rect(
-      this.offset.x,//this.bound.left,
-      this.offset.y,//this.bound.top,
-      this.size.x,
-      this.size.y
-    );
-
-    context.fill();
     context.closePath();
 
     context.restore();
@@ -111,7 +114,9 @@ export function createBarre(conf, { widthScene, heightScene }) {
 
     let barre = new Barre({ width, height, x, y, angle} , { widthScene, heightScene });
 
-    barre.event = event;
+    barre.event        = event;
+    barre.middleHeight = Math.round(height / 2);
+
     barre.addTrait( new Hit( barre));
     barre.addTrait( new Rotate( angle));
 

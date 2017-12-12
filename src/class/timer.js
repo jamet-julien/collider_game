@@ -1,45 +1,53 @@
+export default class Timer {
 
+  constructor(frequence = 1 / 60) {
 
-export default class Timer{
+    this.lastTick = 0;
+    this.cumulateTime = 0;
+    this.visibilityState = 'visible';
+    this.play = false;
+    this.onStart = () => { };
 
-    constructor( freq = 1/60){
-        this.draw         = ()=>{};
-        this.update       = ()=>{};
-        this.cumulateTime = 0;
-        this.lastTick     = 0;
-        this.play         = true;
+    document.addEventListener('visibilitychange', () => {
+      this.visibilityState = document.visibilityState;
+    });
 
-        this.proxyLaunch = ( time)=>{
+    this.proxyRun = (time) => {
 
-          this.cumulateTime += (time - this.lastTick)/1000;
+      this.cumulateTime += (time - this.lastTick || 0) / 1000;
 
-          if( this.cumulateTime > 1){
-            this.cumulateTime = 1;
-          }
+      if (this.cumulateTime > 1) {
+        this.cumulateTime = 1;
+      }
 
-          while( this.cumulateTime > freq){
-              this.update( freq);
-              this.cumulateTime -= freq;
-          }
-          
-          this.lastTick = time;
+      while (this.cumulateTime > frequence) {
+        this.update(frequence);
+        this.cumulateTime -= frequence;
+      }
 
-          this.draw( this.cumulateTime);
-          this.play && this._launch();
+      this.lastTick = time;
 
-        }
+      if (this.visibilityState == "visible") {
+        this.draw(this.cumulateTime);
+      }
 
-    }
+      this.play && this.enqueue();
 
-    _launch(){
-      requestAnimationFrame( this.proxyLaunch);
-    }
+    };
+  }
 
-    start(){
-      this._launch();
-    }
+  stop() {
+    this.play = false;
+  }
 
-    stop(){
-        this.play = false;
-    }
+  enqueue() {
+    requestAnimationFrame(this.proxyRun);
+  }
+
+  start() {
+    this.play = true;
+    this.onStart();
+    this.enqueue();
+  }
+
 }

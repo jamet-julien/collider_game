@@ -14,7 +14,11 @@ export default class Level{
       this.entities  = [];
       this.conf      = {};
 
-      this.time     = 0;
+      this.onReset = ()=>{};
+
+      this.time         = 0;
+      this.palier       = 0;
+      this.palierPasted = false;
 
       this.event    = Event;
       this.lifeInit = 0;
@@ -37,6 +41,11 @@ export default class Level{
       if( collide != this.lastCollide){
 
         this.event.emit('level.collide', [collide]);
+        
+        if (!this.palierPasted && collide >= this.palier) {
+          this.palierPasted = true;
+          this.event.emit('level.palierPasted', [collide]);
+        }
 
         if (por == 1){
           this.event.emit('level.allCollide', [collide]);
@@ -45,7 +54,7 @@ export default class Level{
       }
 
       this.lastCollide = collide;
-      
+
     }
 
     _validScore( _score) {
@@ -103,12 +112,15 @@ export default class Level{
 
     reset(){
       
-      this.life        =  this.lifeInit;
-      this.lastCollide = 0;
+      this.life         = this.lifeInit;
+      this.lastCollide  = 0;
+      this.palierPasted = false;
 
       this.entities.map((entity) => {
         entity.reset();
       });
+
+      this.onReset();
 
     }
 

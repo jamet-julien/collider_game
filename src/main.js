@@ -22,14 +22,16 @@ function onReady(level){
 }
 
 
-function play() {
+function play() {  
   if (!playing) {
-    timer.start();
+
     playing   = true;
     end       = false;
     totalTime = 0;
     lastSec   = 0;
     sec       = 0;
+
+    timer.start();
   }
 }
 
@@ -37,7 +39,7 @@ async function init(callBack){
 
   const level = await createLevel('./ressource/conf.json', { width: layer1.width, height: layer1.height, onReady });
 
-  timer = new Timer(freq);
+  timer = new Timer( freq);
 
   if (level.conf.debug){
 
@@ -74,10 +76,10 @@ async function init(callBack){
     }
 
     if (end && totalTime > 1) {
-      timer.stop();
-      level.event.emit('level.timeout');
-      level.reset();
       playing = false;
+      timer.stop();
+      level.reset();
+      level.event.emit('level.timeout');
     }
 
     level.update( freq);
@@ -105,13 +107,27 @@ init((o) => {
    console.log( 'GAME OVER')
   })
 
+  o.on('level.tick', ([ timeMax, por]) => {
+    //console.log( timeMax, por)
+  })
+
   o.on('level.collide', ([por]) => {
     console.log(`${por}%`)
+  })
+
+  o.on('level.palierPasted', ([por]) => {
+    console.log(`Palier over`)
+  })
+
+  o.on('level.timeout', () => {
+   console.log(`timeout`);
+    o.play();
   })
 
   o.on('level.allCollide', () => {
     console.log('WIN !!')
   })
+  
   
 });
 

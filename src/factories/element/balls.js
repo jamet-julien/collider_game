@@ -90,14 +90,16 @@ export function createBall(conf, { width, height }) {
     this.died    = false;
     this.pos.x   = x;
     this.pos.y   = y;
+    this.lastPos.x = x;
+    this.lastPos.y = y;
   }
 
   return function ballElement({ size }, event) {
 
     let ball = new Ball( Object.assign(randomPos(), { size }));
 
-    let x = ( Math.random() * 600) - 300;
-    let y = ( Math.random() * 600) - 300;
+    let y = Math.random();
+    let x = ( Math.random() * 2 ) - 1;
 
     ball.addTrait( new Mover( x, y));
     ball.addTrait( new Bounce( { width, height }));
@@ -106,11 +108,10 @@ export function createBall(conf, { width, height }) {
     ball.grid  = conf.resolution;
     ball.event = event;
 
-
     ball.reset = reset.bind( ball);
 
-    ball.draw        = draw.bind(ball);
-    ball.drawPaint   = drawPaint.bind( ball);
+    ball.draw      = draw.bind(ball);
+    ball.drawPaint = drawPaint.bind( ball);
     
     return ball;
 

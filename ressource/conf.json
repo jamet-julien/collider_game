@@ -1,8 +1,10 @@
 {
   "crashImage"   : "./ressource/crash.png",
   "destroyImage" : "./ressource/titre-test.png",
-  "time"         : 300,
-  "debug"        : true,
+  
+  "time"         : 45,
+  "palier"       : 70,
+  "debug"        : false,
   "resolution"   : 25,
 
   "setting"      : {
@@ -10,101 +12,11 @@
   },
 
   "barre" : [
-    { "width" : 250, "height" : 20, "x" : -10, "y" : 640 , "angle" : 15},
-    { "width" : 250, "height" : 20, "x" : 478, "y" : 640 , "angle" : 15}
+    { "width" : 215, "height" : 20, "x" : -10, "y" : 640 , "angle" : 15},
+    { "width" : 215, "height" : 20, "x" : 478, "y" : 640 , "angle" : 15}
   ],
   
   "balls" : [
-    {
-      "size": 8
-    },
-    {
-      "size": 8
-    },
-    {
-      "size": 8
-    },
-    {
-      "size": 8
-    },
-    {
-      "size": 8
-    },
-    {
-      "size": 8
-    },
-    {
-      "size": 8
-    },
-    {
-      "size": 8
-    },
-    {
-      "size": 8
-    },
-    {
-      "size": 8
-    },
-    {
-      "size": 8
-    },
-    {
-      "size": 8
-    },
-    {
-      "size": 8
-    },
-    {
-      "size": 8
-    },
-    {
-      "size": 8
-    },
-    {
-      "size": 8
-    },
-    {
-      "size": 8
-    },
-    {
-      "size": 8
-    },
-    {
-      "size": 8
-    },
-    {
-      "size": 8
-    },
-    {
-      "size": 8
-    },
-    {
-      "size": 8
-    },
-    {
-      "size": 8
-    },
-    {
-      "size": 8
-    },
-    {
-      "size": 8
-    },
-    {
-      "size": 8
-    },
-    {
-      "size": 8
-    },
-    {
-      "size": 8
-    },
-    {
-      "size": 8
-    },
-    {
-      "size": 8
-    },
     {
       "size": 8
     },

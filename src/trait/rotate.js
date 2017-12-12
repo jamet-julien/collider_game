@@ -23,7 +23,7 @@ export default class Rotate extends Trait{
       if (!this.disable){
         this.angle  += (100 * freq);
       }else{
-        this.angle  -= (400 * freq);
+        this.angle  -= (300 * freq);
       }
 
     }
