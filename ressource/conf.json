@@ -1,7 +1,7 @@
 {
   "crashImage"   : "./ressource/crash.png",
   "destroyImage" : "./ressource/titre-test.png",
-  "debug"        : true,
+  "debug"        : false,
   "resolution"   : 25,
 
   "setting"      : {

@@ -43,6 +43,11 @@ export function createBall(conf, { width, height }) {
 
   function draw( context, cumulate) {
 
+
+    if( this.died){
+      return false;
+    }
+
     context.fillStyle = `#FFF`;
     context.beginPath();
 
@@ -61,6 +66,11 @@ export function createBall(conf, { width, height }) {
 
   function drawPaint( context, cumulate){
 
+
+    if( this.died){
+      return false;
+    }
+
     context.strokeStyle = `#000`;
     context.strokeStyle = `#000`;
    
@@ -75,6 +85,13 @@ export function createBall(conf, { width, height }) {
 
   }
 
+  function reset(){
+    let { x, y } = randomPos();
+    this.died    = false;
+    this.pos.x   = x;
+    this.pos.y   = y;
+  }
+
   return function ballElement({ size }) {
 
     let ball = new Ball( Object.assign(randomPos(), { size }));
@@ -87,6 +104,9 @@ export function createBall(conf, { width, height }) {
     ball.addTrait( new Hit( ball));
 
     ball.grid = conf.resolution;
+
+
+    ball.reste = reset.bind( ball);
 
     ball.draw        = draw.bind(ball);
     ball.drawPaint   = drawPaint.bind( ball);

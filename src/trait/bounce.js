@@ -58,15 +58,11 @@ export default class Bounce extends Trait{
       let randMov = .2, randMov2 = randMov*2;
 
 
-      if ( entity.bound.bottom >= this.height || entity.bound.top <= 0){
+      if (entity.bound.top <= 0){
         entity.mover.vel.y *= -1;
 
         if(Math.random()<.5){
           entity.mover.vel.x += ((Math.random() * randMov2) - randMov);
-        }
-
-        if (entity.bound.bottom >= this.height){
-          entity.bound.bottom = this.height;
         }
 
         if (entity.bound.top <= 0) {
@@ -75,20 +71,30 @@ export default class Bounce extends Trait{
 
       }
 
-      if ( entity.bound.right >= this.width || entity.bound.left <= 0 ) {
+      if (entity.bound.right >= this.width || entity.bound.left <= 0 ) {
         entity.mover.vel.x *= -1;
 
         if(Math.random()<.5){
           entity.mover.vel.y += ((Math.random() * randMov2) - randMov);
         }
 
-          if(entity.bound.right >= this.width){
-            entity.bound.right = this.width;
-          }
-          if(entity.bound.left <= 0){
-            entity.bound.left = 0;
-          }
-        
+        if (entity.bound.right >= this.width) {
+          entity.bound.right = this.width;
+        }
+
+        if(entity.bound.left <= 0){
+          entity.bound.left = 0;
+        }
+      
+      }
+
+      if (entity.bound.bottom >= (this.height + (entity.radius*2)) ){
+        entity.died = true;
+
+        if (entity.bound.bottom >= this.height) {
+          entity.bound.bottom = this.height;
+        }
+       
       }
 
     }

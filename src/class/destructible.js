@@ -139,6 +139,17 @@ export default class Destructible{
   }
 
 
+  reset(){
+
+    for (let pixel of this.dataWorld.getCoordonate()) {
+      pixel.died = false;
+    }
+
+    this.updateBuffer();
+
+  }
+
+
   updateBuffer(){
     
     this.buffer.width  = this.dataWorld.width;

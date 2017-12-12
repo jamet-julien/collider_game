@@ -13,6 +13,8 @@ export default class Ball{
       this.width   = size*2;
       this.offset  = new Vector( -size, -size);
       this.bound   = new BoundingBox( this.pos, this.size, this.offset);
+
+      this.died    = false;
     }
 
     getSegment() {

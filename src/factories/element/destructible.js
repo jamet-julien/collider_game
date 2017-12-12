@@ -151,6 +151,11 @@ export function createDestructible( conf, dataWorld, getCrash) {
     context.drawImage( this.drawImageInit(), 0, 0);
   }
 
+
+  function reset(){
+    
+  }
+
   return function destructibleElement() {
 
     let oDestructible = new Destructible({ dpi: conf.setting.dpi, resolution: conf.setting.resolution});

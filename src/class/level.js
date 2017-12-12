@@ -14,18 +14,26 @@ export default class Level{
       this.entityCollider = new EntityCollider( this.entities);
     }
 
+    reset(){
+      
+      this.entities.map((entity) => {
+        entity.reset();
+      });
+
+    }
+
     update( freq){
 
       this.entities.map( (entity) =>{
-        entity.update( freq);
+          entity.update( freq);
       });
 
       this.entities.map((entity) => {
-        this.entityCollider.check( entity);
+          this.entityCollider.check( entity);
       });
 
       this.entities.map((entity) => {
-        entity.finalize();
+          entity.finalize();
       });
 
     }

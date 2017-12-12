@@ -8,7 +8,7 @@ export class EntityCollider{
 
     this.entities.forEach( candidate => {
 
-      if ( subject === candidate) {
+      if (subject === candidate || candidate.died || subject.died) {
         return;
       }
 
