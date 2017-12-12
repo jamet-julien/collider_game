@@ -28,6 +28,8 @@ export function createLevel(pathName, { width, height, onReady}){
     ])).then(([conf, destroyImage, getCrash, dataWorld]) => {
 
     let level           = new Level({ width, height });
+    level.time          = conf.time;
+    
     let factoryDestruct = createDestructible(conf, dataWorld, getCrash);
     let factoryBall     = createBall( conf, { width, height });
 
@@ -60,7 +62,7 @@ export function createLevel(pathName, { width, height, onReady}){
     conf.balls.map( (obj)=>{
 
       let ball = factoryBall( obj, level.event);
-      console.log(ball.event.eventList);
+
       level.entities.push( ball);
       level.lifeInit++;
       level.render.pushOnLayer( 'layer1', ball.drawPaint);

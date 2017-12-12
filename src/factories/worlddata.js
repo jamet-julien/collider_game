@@ -71,6 +71,8 @@ export function createDataWorld( image, { width = 468, resolution = 30, dpi = 1 
 
       }).then(({ width, height, buffer})=>{
 
+        let total = 0;
+
         for( let i = 0; i < data.length; i++){
 
           let num     = data[i],
@@ -86,20 +88,21 @@ export function createDataWorld( image, { width = 468, resolution = 30, dpi = 1 
 
           pos.x = Math.floor( x/resolution) * resolution;
           pos.y = Math.floor( y/resolution) * resolution;
-          
+
           name = `${pos.x} ${pos.y}`;
-          
+
           x += Math.round( Math.random() * 3);
           y += Math.round( Math.random() * 3);
 
-          if ( _coordinate.has(name)){
-            _coordinate.get(name).push( { x, y, died : false, color : `#FFF` });
+          if ( _coordinate.has( name)){
+            total++;
+            _coordinate.get( name).push( { x, y, died : false, color : `#FFF` });
           }
-
         }
 
         return {
-          width, 
+          width,
+          total,
           height,
           buffer,
           coordinate    :  _coordinate,

@@ -12,6 +12,10 @@ export default class Destructible{
       this.bufferCrash = false;
       this.context     = this.buffer.getContext('2d');
 
+
+      this.totalPixel   = 0;
+      this.currentPixel = 0;
+
       this.size   = new Vector(0, 0);
       this.offset = new Vector(0, 0);
 
@@ -139,7 +143,7 @@ export default class Destructible{
   }
 
 
-  reset(){
+  resetBuffer(){
 
     for (let pixel of this.dataWorld.getCoordonate()) {
       pixel.died = false;
@@ -157,7 +161,8 @@ export default class Destructible{
 
     this.size.x        = this.dataWorld.width;
     this.size.y        = this.dataWorld.height;
-    
+    this.totalPixel    = this.dataWorld.total;
+
     for (let { x, y, died, color } of this.dataWorld.getCoordonate()) {
       this.drawPixel( this.context, died, x, y, color);
     }

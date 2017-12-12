@@ -107,7 +107,7 @@ export function createBall(conf, { width, height }) {
     ball.event = event;
 
 
-    ball.reste = reset.bind( ball);
+    ball.reset = reset.bind( ball);
 
     ball.draw        = draw.bind(ball);
     ball.drawPaint   = drawPaint.bind( ball);

@@ -23,40 +23,39 @@ class Hit extends Trait{
         posList       = candidate.mover.snapPos( candidate),
         pixelList     = this.subject.dataWorld.getCellList( posList),
         currentPos    = candidate.pos,
-
+        lenDied       = 0,
         pixelCollider = [];
 
     pixelList.map( (pixel, index) => {
 
       if( pixel.length){
 
-        if( pixel.length <= 2){
+        for (let i = 0; i < pixel.length; i++){
+          
+          let distance   = this.distance( currentPos, pixel[i]) ;
 
-            update = true;
+          if (this.debug){
+            pixel[i].color = `#0F0`;
+          }
 
-            for (let i = 0; i < pixel.length; i++) {
-                pixel[i].died = true;
-            } 
-
-        }else{
-
-          for (let i = 0; i < pixel.length; i++){
-            
-            let distance   = this.distance( currentPos, pixel[i]) ;
-  
-            if (this.debug){
-              pixel[i].color = `#0F0`;
-            }
-  
-            if( !pixel[i].died && distance <= candidate.radius){
-              pixel[ i ].died = true;
-              pixelCollider.push(pixel[i]);
-              update          = true;
-            }
-          } 
-        }
+          if( !pixel[i].died && distance <= candidate.radius){
+            pixel[ i ].died = true;
+            this.subject.currentPixel++;
+            pixelCollider.push( pixel[i]);
+            update          = true;
+          }
+        } 
+       
         
         if ( update){
+              
+          this.subject.event.emit('destructible.collide',
+            [
+              this.subject.currentPixel / this.subject.totalPixel,
+              this.subject.currentPixel,
+              this.subject.totalPixel
+            ]);
+            
           this.subject.pushPiece( posList[ index ]);
         }
 
@@ -153,7 +152,7 @@ export function createDestructible( conf, dataWorld, getCrash) {
 
 
   function reset(){
-    
+    this.resetBuffer();
   }
 
   return function destructibleElement( event) {
@@ -167,7 +166,7 @@ export function createDestructible( conf, dataWorld, getCrash) {
 
     oDestructible.event     = event;
     oDestructible.dataWorld = dataWorld;
-    
+
     oDestructible.updateBuffer();
 
     oDestructible.bufferCrash = getCrash({ width: 50, height: 50 });
@@ -178,6 +177,7 @@ export function createDestructible( conf, dataWorld, getCrash) {
     oDestructible.drawDebug = drawDebug.bind( oDestructible);
     oDestructible.draw      = draw.bind( oDestructible);
     oDestructible.drawInit  = drawInit.bind( oDestructible);
+    oDestructible.reset     = reset.bind( oDestructible);
   
 
     return oDestructible;

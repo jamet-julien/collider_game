@@ -14,15 +14,38 @@ export default class Level{
       this.entities  = [];
       this.conf      = {};
 
+      this.time     = 0;
+
       this.event    = Event;
       this.lifeInit = 0;
       this.life     = 0;
       this.locked   = false;
 
+      this.lastCollide = 0;
+
       this.entityCollider = new EntityCollider( this.entities);
 
-      this.event.on('ball.died', this.onBallDied.bind( this));
+      this.event.on( 'ball.died', this.onBallDied.bind( this));
+      this.event.on( 'destructible.collide', this.onDestructibleCollide.bind( this));
     
+    }
+
+    onDestructibleCollide( [por]){
+
+      let collide = Math.round(por * 100);
+
+      if( collide != this.lastCollide){
+
+        this.event.emit('level.collide', [collide]);
+
+        if (por == 1){
+          this.event.emit('level.allCollide', [collide]);
+        }
+
+      }
+
+      this.lastCollide = collide;
+      
     }
 
     _validScore( _score) {
@@ -79,7 +102,10 @@ export default class Level{
     }
 
     reset(){
-      this.life =  this.lifeInit;
+      
+      this.life        =  this.lifeInit;
+      this.lastCollide = 0;
+
       this.entities.map((entity) => {
         entity.reset();
       });

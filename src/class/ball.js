@@ -3,11 +3,13 @@ import BoundingBox from "./boundingbox.js";
 
 export default class Ball{
 
-    constructor({x, y, size}){
+    constructor( { x, y, size}){
+
       this.pos     = new Vector( x, y);
       this.lastPos = this.pos.copy();
       this.traits  = [];
       this.grid    = 0;
+
       this.size    = new Vector( size*2,  size*2);
       this.radius  = Math.round(size);
       this.width   = size*2;
@@ -16,6 +18,7 @@ export default class Ball{
 
       this.died    = false;
       this.event   = false;
+
     }
 
     getSegment() {

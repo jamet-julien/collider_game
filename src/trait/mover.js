@@ -9,7 +9,7 @@ export default class Mover extends Trait{
       this.y = y;
       this.vel     = new Vector( x, y); 
 
-      this.vel.magnetude = 300;
+      this.vel.magnetude = 400;
 
       this.lastVel = this.vel.copy();
 

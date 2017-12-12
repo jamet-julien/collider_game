@@ -104,6 +104,14 @@ init((o) => {
   o.on( 'level.died', () => {
    console.log( 'GAME OVER')
   })
+
+  o.on('level.collide', ([por]) => {
+    console.log(`${por}%`)
+  })
+
+  o.on('level.allCollide', () => {
+    console.log('WIN !!')
+  })
   
 });
 
