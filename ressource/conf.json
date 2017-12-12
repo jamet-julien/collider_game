@@ -9,8 +9,8 @@
   },
 
   "barre" : [
-    { "width" : 220, "height" : 20, "x" : -10, "y" : 640 , "angle" : 15},
-    { "width" : 220, "height" : 20, "x" : 478, "y" : 640 , "angle" : 15}
+    { "width" : 110, "height" : 20, "x" : -10, "y" : 640 , "angle" : 15},
+    { "width" : 110, "height" : 20, "x" : 478, "y" : 640 , "angle" : 15}
   ],
   
   "balls" : [

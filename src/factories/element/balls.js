@@ -92,7 +92,7 @@ export function createBall(conf, { width, height }) {
     this.pos.y   = y;
   }
 
-  return function ballElement({ size }) {
+  return function ballElement({ size }, event) {
 
     let ball = new Ball( Object.assign(randomPos(), { size }));
 
@@ -103,7 +103,8 @@ export function createBall(conf, { width, height }) {
     ball.addTrait( new Bounce( { width, height }));
     ball.addTrait( new Hit( ball));
 
-    ball.grid = conf.resolution;
+    ball.grid  = conf.resolution;
+    ball.event = event;
 
 
     ball.reste = reset.bind( ball);

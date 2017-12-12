@@ -37,7 +37,7 @@ export function createLevel(pathName, { width, height, onReady}){
 
   
 //destructible
-    let destruct   = factoryDestruct();
+    let destruct = factoryDestruct( level.event);
 
     level.conf = conf;
     level.entities.push( destruct);
@@ -49,7 +49,7 @@ export function createLevel(pathName, { width, height, onReady}){
     }
 
     conf.barre.map( (obj) =>{
-      let barre = factoryBarre( obj);
+      let barre = factoryBarre( obj, level.event);
       level.entities.push(barre);
       level.render.pushOnLayer('layer2', barre.draw);
     });
@@ -59,13 +59,16 @@ export function createLevel(pathName, { width, height, onReady}){
 //destroyer
     conf.balls.map( (obj)=>{
 
-      let ball = factoryBall(obj);
-
+      let ball = factoryBall( obj, level.event);
+      console.log(ball.event.eventList);
       level.entities.push( ball);
+      level.lifeInit++;
       level.render.pushOnLayer( 'layer1', ball.drawPaint);
       level.render.pushOnLayer( 'layer2', ball.draw);
       
-    })
+    });
+
+    level.life = level.lifeInit;
     
     if( !level.conf.debug) {
       level.render.drawOnce( 'layer1', destruct.drawInit);

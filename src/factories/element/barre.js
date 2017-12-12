@@ -103,11 +103,11 @@ export function createBarre(conf, { widthScene, heightScene }) {
 
   }
 
-  return function barreElement({ width, height, x, y , angle}) {
+  return function barreElement({ width, height, x, y , angle}, event) {
 
     let barre = new Barre({ width, height, x, y, angle} , { widthScene, heightScene });
 
-
+    barre.event = event;
     barre.addTrait( new Hit( barre));
     barre.addTrait( new Rotate( angle));
 

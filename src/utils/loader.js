@@ -13,6 +13,27 @@ export function loadImage( pathName){
 }
 
 
+export function sendData( obj) {
+
+  let url = window.CONF.url,
+    opt = {},
+    entete = {
+      crossDomain : true,
+      method      : 'POST',
+      credentials : 'same-origin',
+      headers     : {
+        'Cache-Control' : 'no-cache',
+        'Content-Type'  : 'application/x-www-form-urlencoded'
+      }
+    };
+
+  opt.body = getQueryString( obj);
+
+  return fetch(url, Object.assign( entete, opt))
+        .then((result) => result.json());
+};
+
+
 export function loadJson( pathName){
 
   return new Promise( (resolve) => {

@@ -156,7 +156,7 @@ export function createDestructible( conf, dataWorld, getCrash) {
     
   }
 
-  return function destructibleElement() {
+  return function destructibleElement( event) {
 
     let oDestructible = new Destructible({ dpi: conf.setting.dpi, resolution: conf.setting.resolution});
 
@@ -165,7 +165,9 @@ export function createDestructible( conf, dataWorld, getCrash) {
       oDestructible.activeDebug();
     }
 
+    oDestructible.event     = event;
     oDestructible.dataWorld = dataWorld;
+    
     oDestructible.updateBuffer();
 
     oDestructible.bufferCrash = getCrash({ width: 50, height: 50 });

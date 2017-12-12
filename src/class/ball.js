@@ -15,6 +15,7 @@ export default class Ball{
       this.bound   = new BoundingBox( this.pos, this.size, this.offset);
 
       this.died    = false;
+      this.event   = false;
     }
 
     getSegment() {

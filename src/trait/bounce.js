@@ -88,12 +88,10 @@ export default class Bounce extends Trait{
       
       }
 
-      if (entity.bound.bottom >= (this.height + (entity.radius*2)) ){
-        entity.died = true;
+      if( !entity.died && entity.bound.bottom >= (this.height+(entity.radius*2))){
 
-        if (entity.bound.bottom >= this.height) {
-          entity.bound.bottom = this.height;
-        }
+        entity.died = true;
+        entity.event.emit( 'ball.died', [entity]);
        
       }
 
