@@ -34,7 +34,7 @@ class Hit extends Trait{
 export function createBall(conf, { width, height }) {
 
   function randomPos() {
-    let partHeight = height / 3;
+    let partHeight = height / 4;
     return {
       x: Math.ceil( Math.random() * width),
       y: Math.ceil((Math.random() * partHeight) + partHeight*2)
@@ -98,7 +98,7 @@ export function createBall(conf, { width, height }) {
 
     let ball = new Ball( Object.assign(randomPos(), { size }));
 
-    let y = Math.random();
+    let y = Math.random() * -1;
     let x = ( Math.random() * 2 ) - 1;
 
     ball.addTrait( new Mover( x, y));

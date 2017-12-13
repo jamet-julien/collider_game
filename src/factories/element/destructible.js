@@ -55,7 +55,7 @@ class Hit extends Trait{
               this.subject.currentPixel,
               this.subject.totalPixel
             ]);
-            
+
           this.subject.pushPiece( posList[ index ]);
         }
 
@@ -67,7 +67,11 @@ class Hit extends Trait{
     if( pixelCollider.length >= 2){
 
       let [ vec1, vec2] = this.getCouple( pixelCollider);
-
+/*
+      if (candidate.lastPos.x <= candidate.pos.x && candidate.lastPos.y <= candidate.pos.y){
+        [vec1, vec2] = [vec2, vec1];
+      }
+*/
       let vector = new Vector( vec1.x, vec1.y);
 
       vector.sub( new Vector( vec2.x, vec2.y));
