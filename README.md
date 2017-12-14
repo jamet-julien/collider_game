@@ -1,4 +1,4 @@
-# Template pour jeu Sosh
+# Template pour jeu
 
 ### Système de grille
 Identique à bootstrap (https://v4-alpha.getbootstrap.com/layout/grid/)
