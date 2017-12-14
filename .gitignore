@@ -3,4 +3,5 @@
 _tmp/*
 node_modules
 yo-config.json
+package-lock.json
 \.idea/
