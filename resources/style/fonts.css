@@ -1,0 +1,49 @@
+@font-face {
+    font-family: 'Sosh Medium';
+    font-style: normal;
+    font-weight: normal;
+    src: url('./fonts/Sosh-Medium.ttf') format('truetype'),
+    url('./fonts/Sosh-Medium.otf') format('truetype'),
+    url('./fonts/Sosh-Medium.woff') format('woff'),
+    url('./fonts/Sosh-Medium.eot?#iefix') format('embedded-opentype');
+}
+
+@font-face {
+    font-family: 'Sosh Black';
+    font-style: normal;
+    font-weight: bold;
+    src: url('./fonts/Sosh-Black.ttf') format('truetype'),
+    url('./fonts/Sosh-Black.otf') format('truetype'),
+    url('./fonts/Sosh-Black.woff') format('woff'),
+    url('./fonts/Sosh-Black.eot?#iefix') format('embedded-opentype');
+}
+
+@font-face {
+    font-family: 'Sosh Thin';
+    font-style: normal;
+    font-weight: normal;
+    src: url('./fonts/Sosh-Thin.ttf') format('truetype'),
+    url('./fonts/Sosh-Thin.otf') format('truetype'),
+    url('./fonts/Sosh-Thin.woff') format('woff'),
+    url('./fonts/Sosh-Thin.eot?#iefix') format('embedded-opentype');
+}
+
+@font-face {
+    font-family: 'Sosh Regular';
+    font-style: normal;
+    font-weight: normal;
+    src: url('./fonts/Sosh-Regular.ttf') format('truetype'),
+    url('./fonts/Sosh-Regular.otf') format('truetype'),
+    url('./fonts/Sosh-Regular.woff') format('woff'),
+    url('./fonts/Sosh-Regular.eot?#iefix') format('embedded-opentype');
+}
+
+@font-face {
+    font-family: 'Sosh Bold';
+    font-style: normal;
+    font-weight: normal;
+    src: url('./fonts/Sosh-Bold.ttf') format('truetype'),
+    url('./fonts/Sosh-Bold.otf') format('truetype'),
+    url('./fonts/Sosh-Bold.woff') format('woff'),
+    url('./fonts/Sosh-Bold.eot?#iefix') format('embedded-opentype');
+}

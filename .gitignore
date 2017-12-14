@@ -1,0 +1,6 @@
+*~
+.DS_Store
+_tmp/*
+node_modules
+yo-config.json
+\.idea/

@@ -1,0 +1,8 @@
+{
+  "presets": [
+    "async-to-bluebird",
+    "es2015",
+    "stage-2"
+  ],
+  "comments": false
+}

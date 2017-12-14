@@ -1,0 +1,95 @@
+/* --------------------------------- */
+/* ------------- SPIN -------------- */
+/* --------------------------------- */
+
+@-moz-keyframes spin {
+    0% {
+    }
+    100% {
+        -moz-transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes spin {
+    0% {
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* --------------------------------- */
+/* ------------- TURN -------------- */
+/* --------------------------------- */
+
+@-moz-keyframes turn {
+    0% {
+    }
+    50% {
+        -moz-transform: rotate(180deg);
+    }
+    100% {
+        -moz-transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes turn {
+    0% {
+    }
+    50% {
+        -webkit-transform: rotate(180deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes turn {
+    0% {
+    }
+    50% {
+        transform: rotate(180deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* --------------------------------- */
+/* ------------- DASH -------------- */
+/* --------------------------------- */
+
+@-moz-keyframes dash {
+    from {
+        stroke-dashoffset: 97.39;
+    }
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@-webkit-keyframes dash {
+    from {
+        stroke-dashoffset: 97.39;
+    }
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes dash {
+    from {
+        stroke-dashoffset: 97.39;
+    }
+    to {
+        stroke-dashoffset: 0;
+    }
+}

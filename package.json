@@ -1,0 +1,54 @@
+{
+  "name"        : "bye_bye",
+  "version"     : "0.0.1",
+  "description" : "",
+  "main"        : "",
+  "scripts"     : {
+    "test" : ""
+  },
+
+  "author"          : "Julien Jamet <jamet.julien@gmail.com>",
+  "license"         : "ISC",
+  "devDependencies" : {
+    "autoprefixer"                   : "^6.3.6",
+    "babel-core"                     : "^6.26.0",
+    "babel-loader"                   : "^7.1.2",
+    "babel-polyfill"                 : "^6.26.0",
+    "babel-preset-async-to-bluebird" : "^1.1.0",
+    "babel-preset-es2015"            : "^6.24.1",
+    "babel-preset-stage-2"           : "^6.24.1",
+    "babel-regenerator-runtime"      : "^6.5.0",
+    "bluebird"                       : "^3.5.1",
+    "crypto-js"                      : "^3.1.9-1",
+    "css-mqpacker"                   : "^4.0.1",
+    "diacritics"                     : "^1.3.0",
+    "gulp"                           : "^3.9.1",
+    "gulp-babel"                     : "^6.1.2",
+    "gulp-clean-css"                 : "^3.0.4",
+    "gulp-concat"                    : "^2.6.1",
+    "gulp-cssbeautify"               : "^0.1.3",
+    "gulp-csscomb"                   : "^3.0.7",
+    "gulp-cssmin"                    : "^0.1.7",
+    "gulp-livereload"                : "^3.8.1",
+    "gulp-plumber"                   : "^1.1.0",
+    "gulp-postcss"                   : "^6.1.0",
+    "gulp-rename"                    : "^1.2.2",
+    "gulp-styledown"                 : "0.0.2",
+    "gulp-uglify"                    : "^3.0.0",
+    "gulp-watch"                     : "^4.3.5",
+    "json-loader"                    : "^0.5.4",
+    "pixrem"                         : "^3.0.0",
+    "postcss-at2x"                   : "^2.0.0",
+    "postcss-color-function"         : "^2.0.1",
+    "postcss-flexibility"            : "^2.0.0",
+    "postcss-for-var"                : "^1.0.3",
+    "postcss-responsive-font"        : "^1.0.3",
+    "postcss-short-position"         : "^1.0.0",
+    "precss"                         : "^1.4.0",
+    "webpack"                        : "^3.8.1",
+    "whatwg-fetch"                   : "^2.0.3"
+  },
+  "dependencies": {
+    "promise-polyfill" : "6.1.0"
+  }
+}

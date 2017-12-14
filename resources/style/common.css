@@ -1,0 +1,653 @@
+/* --------------------------------- */
+/* ------------- PAGES ------------- */
+/* --------------------------------- */
+html {
+    height: 100%;
+    font-size: 62.5%;
+}
+
+body {
+    overflow-x: hidden;
+    position: relative;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+    background: black;
+    color: white;
+    font-family: 'Sosh Medium';
+    text-align: center;
+}
+
+img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+ul.pages {
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+}
+
+ul.pages > li {
+    position: absolute;
+    overflow: hidden;
+    left: 0;
+    right: 0;
+    height: 0 !important;
+    opacity: 0;
+    z-index: 1;
+    min-height: 100%;
+
+    display         : flex;
+    align-items     : center;
+    flex-direction  : column;
+    justify-content : space-around;
+
+    -webkit-transition: opacity .5s;
+    -moz-transition: opacity .5s;
+    -ms-transition: opacity .5s;
+    -o-transition: opacity .5s;
+}
+
+ul.pages > li.active {
+    height     : auto !important;
+    left       : 0;
+    right      : 0;
+    z-index    : 10;
+    opacity    : 1;
+    max-height : none;
+
+
+
+    -webkit-transition : opacity 1s;
+    -moz-transition    : opacity 1s;
+    -ms-transition     : opacity 1s;
+    -o-transition      : opacity 1s;
+}
+
+ul.pages li.active .container {
+    margin-top: 20px;
+    display: inline-block;
+}
+
+.container {
+    padding: 0 10px;
+    overflow: hidden;
+}
+
+.col-xs-12 {
+    padding: 0;
+}
+
+.loading {
+    position           : fixed;
+    top                : 10px;
+    right              : 10px;
+    z-index            : 12;
+    -webkit-transition : all .5s;
+    -moz-transition    : all .5s;
+    -ms-transition     : all .5s;
+    -o-transition      : all .5s;
+    left               : 10px;
+    bottom             : 10px;
+    display            : flex;
+    align-items        : center;
+    justify-content    : center;
+}
+
+.loading > img {
+    -webkit-animation : spin 1.5s infinite linear;
+    -moz-animation    : spin 1.5s infinite linear;
+    -ms-animation     : spin 1.5s infinite linear;
+    -o-animation      : spin 1.5s infinite linear;
+    animation         : spin 1.5s infinite linear;
+}
+
+.no-margin {
+    margin: 0 !important
+}
+
+.turn-block {
+    height: 210px;
+}
+
+.turn {
+    -webkit-animation: turn 3s infinite;
+    -moz-animation: turn 3s infinite;
+    -ms-animation: turn 3s infinite;
+    -o-animation: turn 3s infinite;
+    animation: turn 3s infinite;
+    max-height: 180px;
+}
+
+/* ---------------------------------- */
+/* ------------- HEADER ------------- */
+/* ---------------------------------- */
+
+header {
+    background: #00a1ab;
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    margin-bottom: 30px;
+}
+
+/*------------------*/
+/*------ FORM ------*/
+/*------------------*/
+form {
+    padding: 0 30px;
+}
+
+form ::-webkit-input-placeholder {
+    /* WebKit, Blink, Edge */
+    color: white;
+}
+
+form :-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    color: white;
+    opacity: 1;
+}
+
+form ::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    color: white;
+    opacity: 1;
+}
+
+form :-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: white;
+}
+
+form ::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: white;
+}
+
+form .checkbox {
+    margin: 2px auto;
+}
+
+form .checkbox input[type="checkbox"]:not(:checked),
+form .checkbox input[type="checkbox"]:checked {
+    position: absolute;
+    left: -9999px;
+}
+
+form .checkbox input[type="checkbox"]:not(:checked) + label,
+form .checkbox input[type="checkbox"]:checked + label {
+    position: relative;
+    padding-left: 20px;
+    cursor: pointer;
+    font-size: 1.6rem;
+}
+
+form .checkbox input[type="checkbox"]:not(:checked) + label:before,
+form .checkbox input[type="checkbox"]:checked + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 1px;
+    width: 15px;
+    height: 15px;
+    border: 1px solid white;
+    background: black;
+}
+
+form .checkbox input[type="checkbox"]:not(:checked) + label:after,
+form .checkbox input[type="checkbox"]:checked + label:after {
+    content: 'x';
+    position: absolute;
+    top: 0;
+    left: 2.5px;
+    font-size: 20px;
+    line-height: 15px;
+    color: white;
+    transition: all .2s;
+}
+
+form .checkbox input[type="checkbox"]:not(:checked) + label:after {
+    opacity: 0;
+    transform: scale(0);
+}
+
+form .checkbox input[type="checkbox"]:checked + label:after {
+    opacity: 1;
+    transform: scale(1);
+}
+
+form input[type=submit] {
+    background: #ffcd00;
+    padding: 10px 20px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    font-family: 'Sosh Black';
+    font-size: 2.3rem;
+    text-decoration: none;
+    margin: auto;
+    width: auto;
+    color: black;
+    border: 0;
+    margin: 20px auto;
+}
+
+form input[type=submit]:active {
+    color: #ffcd00;
+    background: black;
+    border: 4px solid #ffcd00;
+}
+
+@media (min-width: 480px) {
+    form input[type=submit] {
+        padding: 10px 30px;
+        font-size: 2.6rem;
+    }
+}
+
+input {
+    display: block;
+    width: 100%;
+    margin: 5px auto;
+    padding: 2px;
+    background: black;
+    border: 0;
+    border-bottom: 1px solid white;
+    color: white;
+    font-family: 'Sosh Medium';
+    font-size: 1.8rem;
+}
+
+input::-webkit-input-placeholder,
+input:-moz-placeholder,
+input::-moz-placeholder,
+input::-moz-placeholder,
+input:-ms-input-placeholder,
+input::-ms-input-placeholder {
+    /* WebKit, Blink, Edge */
+    color: white;
+}
+
+input[type="text"].input-error,
+input[type="email"].input-error {
+    border-bottom: 1px solid red;
+    color: red;
+}
+
+input[type="text"].input-error input:-webkit-autofill,
+input[type="email"].input-error input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 50px white inset;
+    /* Change the color to your own background color */
+    -webkit-text-fill-color: red;
+}
+
+input[type="text"].input-error::-webkit-input-placeholder,
+input[type="email"].input-error::-webkit-input-placeholder,
+input[type="text"].input-error:-moz-placeholder,
+input[type="email"].input-error:-moz-placeholder,
+input[type="text"].input-error::-moz-placeholder,
+input[type="email"].input-error::-moz-placeholder,
+input[type="text"].input-error::-moz-placeholder,
+input[type="email"].input-error::-moz-placeholder,
+input[type="text"].input-error:-ms-input-placeholder,
+input[type="email"].input-error:-ms-input-placeholder,
+input[type="text"].input-error::-ms-input-placeholder,
+input[type="email"].input-error::-ms-input-placeholder {
+    /* WebKit, Blink, Edge */
+    color: red !important;
+}
+
+input[type="checkbox"].input-error + label {
+    color: red !important;
+}
+
+input[type="checkbox"].input-error + label a,
+input[type="checkbox"].input-error + label a:visited {
+    color: red !important;
+}
+
+input[type="checkbox"].input-error + label:before {
+    border: 1px solid red !important;
+}
+
+ul.form {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.error {
+    color: red;
+    text-align: right;
+    margin: 0;
+    -webkit-transition: all .5s;
+    -moz-transition: all .5s;
+    -ms-transition: all .5s;
+    -o-transition: all .5s;
+}
+
+/* ---------------------------------- */
+/* ------------- FOOTER ------------- */
+/* ---------------------------------- */
+
+.footer {
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+}
+
+.footer ul {
+    padding: 0;
+    list-style: none;
+}
+
+.footer ul li {
+    display: inline;
+}
+
+.footer ul li:nth-of-type(n+2)::before {
+    content: ' - ';
+}
+
+/* --------------------------------- */
+/* ------------- BUTTON ------------ */
+/* --------------------------------- */
+
+div.button {
+    line-height: 50px;
+    margin: 20px 0;
+}
+
+div.button a {
+    background: #ffcd00;
+    padding: 9px 30px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    font-family: 'Sosh Black';
+    font-size: 2.1rem;
+    text-decoration: none;
+    margin: auto;
+    width: auto;
+    color: black;
+}
+
+div.button a:active {
+    color: #ffcd00;
+    background: black;
+    border: 4px solid #ffcd00;
+}
+
+/* --------------------------------- */
+/* -------------- TEXT ------------- */
+/* --------------------------------- */
+h2 {
+    color: #ffcd00;
+}
+
+sup {
+    font-size: 2rem;
+}
+
+p {
+    margin: 10px auto;
+}
+
+a.underline {
+    text-decoration: underline;
+}
+
+a, a:hover, a:visited {
+    color: white;
+    text-decoration: none;
+}
+
+.text-size1 {
+    font-size: 1.1rem;
+}
+
+.text-size1_5 {
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+}
+
+.text-size1_7 {
+    font-size: 1.7rem;
+}
+
+.text-size1_9 {
+    font-size: 1.9rem;
+    line-height: 2.2rem;
+}
+
+.text-size2 {
+    font-size: 2rem;
+    line-height: 2.5rem;
+}
+
+.text-size2_5 {
+    font-size: 2.5rem;
+    line-height: 3rem;
+}
+
+.text-size3 {
+    font-size: 3rem;
+    line-height: 4rem;
+}
+
+.text-size3_5 {
+    font-size: 3.5rem;
+    line-height: 3.5rem;
+}
+
+.text-size5 {
+    font-size: 5rem;
+    line-height: 5rem;
+}
+
+.text-size8 {
+    font-size: 8rem;
+    line-height: 8rem;
+}
+
+.text-size10 {
+    font-size: 10rem;
+    line-height: 8rem;
+}
+
+.text-size11 {
+    font-size: 11rem;
+    line-height: 10rem;
+}
+
+.text-size4 {
+    font-size: 4rem;
+}
+
+.text-height2 {
+    line-height: 2rem;
+}
+
+.text-height3 {
+    line-height: 3rem;
+}
+
+.text-height4 {
+    line-height: 4rem;
+}
+
+.text-height6 {
+    line-height: 6rem;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+.big {
+    display: block;
+    color: #ffcd00;
+    font-weight: bold;
+    font-size: 4rem;
+    line-height: 6rem;
+    text-transform: uppercase;
+    margin: 10px 0 30px 0;
+}
+
+.sosh-bold {
+    font-family: 'Sosh Bold', Arial;
+}
+
+.sosh-black {
+    font-family: 'Sosh Black', Arial;
+}
+
+.sosh-regular {
+    font-family: 'Sosh Regular', Arial;
+}
+
+.sosh-medium {
+    font-family: 'Sosh Medium', Arial;
+}
+
+.sosh-thin {
+    font-family: 'Sosh Thin', Arial;
+}
+
+.yellow {
+    color: #ffcd00;
+}
+
+.blue {
+    color: #00a1ab;
+}
+
+.black {
+    color: black;
+}
+
+.pink {
+    color: #f52c69;
+}
+
+.text-justify {
+    text-align: justify;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.bg-white {
+    background: white;
+    color: black;
+}
+
+.height0 {
+    position: relative;
+    height: 0 !important;
+    overflow: hidden !important;
+}
+
+.height0 > div {
+    height: 0 !important;
+}
+
+.not-visible {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.bottom-button {
+    position: absolute;
+    bottom: 10%;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+.button-style {
+    background: #ffcd00;
+    padding: 10px 20px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    font-family: 'Sosh Black';
+    font-size: 2.3rem;
+    text-decoration: none;
+    margin: auto;
+    width: auto;
+    color: black;
+}
+
+.button-style:active {
+    color: #ffcd00;
+    background: black;
+    border: 4px solid #ffcd00;
+}
+
+@media (min-width: 480px) {
+    .button-style {
+        padding: 10px 30px;
+        font-size: 2.6rem;
+    }
+}
+
+.pop-up {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 1;
+    z-index: 10;
+    -webkit-transition: all 0.7s;
+    -moz-transition: all 0.7s;
+    -ms-transition: all 0.7s;
+    -o-transition: all 0.7s;
+}
+
+.pop-up-content {
+    margin-top: 25%;
+    padding-top: 20px;
+    background: black;
+    border: 4px solid #ffcd00;
+}
+
+.not-visible {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.close {
+    cursor: pointer;
+    font-size: 7rem;
+    line-height: 4rem;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 10;
+}

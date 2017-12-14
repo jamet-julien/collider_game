@@ -1,0 +1,29 @@
+<IfModule mod_headers.c>
+    Header add Access-Control-Allow-Origin "*"
+    Header add Access-Control-Allow-Methods "PUT, GET, POST, DELETE, OPTIONS"
+    Header add Access-Control-Allow-Headers "token"
+</IfModule>
+
+#--------------------------------------------------
+# SYSTEM
+#--------------------------------------------------
+# AddType image/x-icon favicon.ico
+php_value date.timezone "Europe/Paris"
+php_value output_handler ob_gzhandler
+
+
+#--------------------------------------------------
+# REWRITE
+#--------------------------------------------------
+# Options +FollowSymlinks
+<IfModule mod_rewrite.c>
+	RewriteEngine on
+
+	RewriteCond %{REQUEST_FILENAME} !^/res/
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+
+	RewriteRule ^([_a-z0-9\-\/]*)\.json$ _app/api.php?query=$1 [QSA,NC,L]
+	RewriteRule ^([a-z0-9A-Z]*)$ index.php?param=$1 [QSA,L]
+
+</IfModule>
