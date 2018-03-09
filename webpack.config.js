@@ -1,7 +1,8 @@
 var webpack = require('webpack');
 var production = process.argv.indexOf("--prod") > -1;
+var WebpackBuildNotifierPlugin;
 
-module.exports = {
+var config = {
     context: __dirname,
     entry: [
         'whatwg-fetch',
@@ -40,3 +41,17 @@ module.exports = {
         })
     ]
 };
+
+if (!production) {
+    WebpackBuildNotifierPlugin = require ('webpack-build-notifier');
+    config.watch = true;
+    config.watchOptions = {};
+    config.watchOptions.aggregateTimeout = 50;
+    config.devtool = 'inline-source-map';
+    config.plugins.push(new WebpackBuildNotifierPlugin({
+        title: 'Game Sosh',
+        successSound: false,
+        failureSound: false
+    }));
+}
+module.exports = config;
